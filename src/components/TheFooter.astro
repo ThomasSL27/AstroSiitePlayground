@@ -1,0 +1,382 @@
+---
+import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
+---
+
+<footer id="the-footer">
+  <div class="footer-inner">
+
+    <!-- Brand column -->
+    <div class="col col-brand">
+      <a href="/" class="footer-logo">
+        <img src={logoSrc} alt="Siite" />
+      </a>
+      <p class="tagline">Vi er dit digitale bureau, der kombinerer teknisk nørderi med moderne markedsføring.</p>
+
+      <div class="social-links">
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="social-btn" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+      </div>
+
+      <div class="addresses">
+        <div class="address-item">
+          <span class="address-label">
+            Aalborg <span class="hq-badge">Hovedkontor</span>
+          </span>
+          <span class="address-text">
+            <i class="fa-solid fa-location-dot"></i>
+            Nålemagervej 1, 9000 Aalborg
+          </span>
+        </div>
+        <div class="address-item">
+          <span class="address-label">København</span>
+          <span class="address-text">
+            <i class="fa-solid fa-location-dot"></i>
+            Strandlodsvej 6A, 1. sal, 2300 København
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support contact column -->
+    <div class="col col-support">
+      <p class="col-title">Support</p>
+
+      <div class="contact-block">
+        <div class="contact-icon">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div>
+          <a href="tel:25818106" class="contact-value">25 81 81 06</a>
+          <span class="contact-hours">Mandag til fredag: 08–15</span>
+        </div>
+      </div>
+
+      <div class="contact-block">
+        <div class="contact-icon">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div>
+          <a href="mailto:support@siite.dk" class="contact-value">support@siite.dk</a>
+          <span class="contact-hours">Mandag til fredag: 08–16</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support links column -->
+    <div class="col col-links">
+      <p class="col-title">Links til support</p>
+      <ul>
+        <li><a href="#">Fjernsupport</a></li>
+        <li><a href="#">Vidensbasen</a></li>
+        <li><a href="#">Send foto</a></li>
+        <li><a href="#">Send video</a></li>
+        <li><a href="#">Send dokumenter</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal column -->
+    <div class="col col-links">
+      <p class="col-title">Legal</p>
+      <ul>
+        <li><a href="#">Datapolitik</a></li>
+        <li><a href="#">Forretningsbetingelser</a></li>
+      </ul>
+    </div>
+
+    <!-- Info column -->
+    <div class="col col-links">
+      <p class="col-title">Info</p>
+      <ul>
+        <li><a href="#">Marketingordbog</a></li>
+        <li><a href="#">Gratis værktøjer</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bar">
+    <span class="bar-left">
+      Siite ApS – CVR: 42990752 &nbsp;·&nbsp; © 2026 – Bygget, vedligeholdt og hostet af Siite i Aalborg
+    </span>
+    <a href="/sitemap.xml" class="bar-sitemap">Sitemap</a>
+  </div>
+</footer>
+
+<style>
+  #the-footer {
+    background: #f8f8f8;
+    color: #444;
+    font-family: 'Comfortaa', cursive;
+    padding-top: 72px;
+    border-top: 1.5px solid #ebebeb;
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px 64px;
+    display: grid;
+    grid-template-columns: 2fr 1.4fr 1fr 1fr 1fr;
+    gap: 48px 40px;
+    align-items: start;
+  }
+
+  /* ─── Logo ─── */
+  .footer-logo {
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo img {
+    width: 100px;
+    height: auto;
+    display: block;
+  }
+
+  /* ─── Tagline ─── */
+  .tagline {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #888;
+    max-width: 280px;
+    margin-bottom: 24px;
+  }
+
+  /* ─── Social ─── */
+  .social-links {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #ebebeb;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+
+  .social-btn:hover {
+    background: #f05a24;
+    color: #fff;
+  }
+
+  /* ─── Addresses ─── */
+  .addresses {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .address-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .address-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hq-badge {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    background: #fff3ee;
+    color: #f05a24;
+    padding: 2px 8px;
+    border-radius: 100px;
+    text-transform: none;
+    font-weight: 700;
+  }
+
+  .address-text {
+    font-size: 0.78rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    line-height: 1.5;
+  }
+
+  .address-text i {
+    color: #f05a24;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  /* ─── Column titles ─── */
+  .col-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #f05a24;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid #e8e8e8;
+  }
+
+  /* ─── Support contact ─── */
+  .contact-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    background: #fff3ee;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f05a24;
+    font-size: 0.8rem;
+  }
+
+  .contact-value {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-family: 'Comfortaa', cursive;
+    transition: color 0.18s ease;
+  }
+
+  .contact-value:hover {
+    color: #f05a24;
+  }
+
+  .contact-hours {
+    display: block;
+    font-size: 0.72rem;
+    color: #aaa;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* ─── Link lists ─── */
+  .col-links ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .col-links ul li a {
+    font-size: 0.82rem;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.18s ease;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  .col-links ul li a:hover {
+    color: #f05a24;
+  }
+
+  /* ─── Bottom bar ─── */
+  .footer-bar {
+    border-top: 1.5px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .bar-left {
+    font-size: 0.75rem;
+    color: #aaa;
+  }
+
+  .bar-sitemap {
+    font-size: 0.75rem;
+    color: #aaa;
+    text-decoration: none;
+    font-family: 'Comfortaa', cursive;
+    transition: color 0.18s ease;
+  }
+
+  .bar-sitemap:hover {
+    color: #f05a24;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 1100px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px 32px;
+    }
+
+    .col-brand {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto auto;
+      column-gap: 40px;
+    }
+
+    .footer-logo  { grid-column: 1; grid-row: 1; }
+    .tagline      { grid-column: 2; grid-row: 1 / 3; align-self: start; margin-bottom: 0; max-width: none; }
+    .social-links { grid-column: 1; grid-row: 2; margin-bottom: 0; }
+    .addresses    { grid-column: 1 / -1; grid-row: 3; flex-direction: row; gap: 40px; margin-top: 8px; }
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      padding: 0 24px 48px;
+      gap: 36px 24px;
+    }
+
+    .col-brand {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tagline { max-width: none; }
+    .addresses { flex-direction: column; gap: 16px; }
+
+    .footer-bar {
+      padding: 20px 24px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

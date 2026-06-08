@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import TheNav from '../components/TheNav.astro';
+import TheFooter from '../components/TheFooter.astro';
 import heroImg from '../assets/1779109002530.jpeg';
 
 // Alle teambilleder hentes og optimeres af Astro
@@ -206,6 +207,7 @@ const teamDepartments = categories.length - 1;
       <p class="no-results" hidden>Ingen i denne afdeling endnu.</p>
     </section>
   </main>
+  <TheFooter />
 </Layout>
 
 <style>

@@ -349,7 +349,7 @@ import christianSrc from '../assets/Christian_Isolated.webp?url';
           pin: true,
           anticipatePin: 1,
           start: "top top",
-          end: () => "+=" + (distance() + window.innerHeight * 0.6),
+          end: () => "+=" + (distance() + window.innerHeight * 0.15),
           scrub: 0.8,
           invalidateOnRefresh: true,
           onUpdate(self) {
@@ -363,7 +363,7 @@ import christianSrc from '../assets/Christian_Isolated.webp?url';
 
       hTl
         .to(track, { x: () => -distance(), ease: "none", duration: 1 })
-        .to({}, { duration: 0.45 });
+        .to({}, { duration: 0.12 });
 
       if (document.fonts?.ready) {
         document.fonts.ready.then(() => ScrollTrigger.refresh());

@@ -94,8 +94,15 @@ import WhySiite from '../components/WhySiite.astro';
       }
 
       @media (max-width: 768px) {
+        #hero {
+          padding: 0 28px;
+        }
+        #logo {
+          width: 160px;
+        }
         #tagline {
-          font-size: clamp(2rem, 10vw, 80px);
+          font-size: clamp(1.5rem, 7vw, 80px);
+          min-height: 0;
         }
       }
     </style>

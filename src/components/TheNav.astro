@@ -226,8 +226,10 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     transition: background 0.18s ease;
   }
 
-  .hamburger:hover {
-    background: #fff3ee;
+  @media (hover: hover) {
+    .hamburger:hover {
+      background: #fff3ee;
+    }
   }
 
   .hamburger span {
@@ -397,6 +399,10 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     transform: translateY(-110%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     display: none;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   #mobile-menu.is-open {
@@ -405,7 +411,7 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
 
   .mobile-links {
     list-style: none;
-    padding-top: 80px;
+    padding-top: var(--nav-h, 60px);
   }
 
   .mobile-links > li {
@@ -515,6 +521,14 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
+
+  /* ─── Nav-højde som CSS-variabel (bruges af mobilmenu padding) ─── */
+  const navEl = document.getElementById("the-nav") as HTMLElement;
+  const setNavH = () => {
+    document.documentElement.style.setProperty("--nav-h", navEl.offsetHeight + "px");
+  };
+  setNavH();
+  window.addEventListener("resize", setNavH);
 
   /* ─── Nav reveal on scroll ─── */
   ScrollTrigger.create({

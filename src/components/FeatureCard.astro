@@ -1,0 +1,173 @@
+---
+import leonardoSrc from '../assets/Siite_Leonardo-removebg-preview.png?url';
+---
+
+<section class="feature-section">
+  <div class="orange-card">
+    <div class="card-content">
+      <span class="label">Web · Branding · Marketing</span>
+      <h2>Digitale løsninger<br>der konverterer</h2>
+      <p>Vi hjælper ambitiøse virksomheder med at vokse online – fra webdesign og branding til performance-marketing der skaber resultater.</p>
+      <a href="#" class="cta">Se vores cases →</a>
+    </div>
+    <div class="card-image">
+      <img src={leonardoSrc} alt="Siite maskot" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8f8;
+    padding: 0 48px;
+  }
+
+  .orange-card {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background: #f05a24;
+    border-radius: 32px;
+    overflow: hidden;
+    max-width: 980px;
+    width: 100%;
+    min-height: 500px;
+  }
+
+  /* Skåret hjørne øverst til højre */
+  .orange-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 26%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, transparent 50%, #f8f8f8 50%);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .card-content {
+    flex: 0 0 56%;
+    padding: 72px 48px 72px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+
+  .card-content h2 {
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.12;
+    margin-bottom: 24px;
+  }
+
+  .card-content p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.85;
+    max-width: 400px;
+    margin-bottom: 40px;
+  }
+
+  .cta {
+    align-self: flex-start;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.45);
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease;
+  }
+
+  .cta:hover {
+    border-color: #fff;
+  }
+
+  .card-image {
+    flex: 0 0 44%;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .card-image img {
+    width: 90%;
+    max-height: 480px;
+    object-fit: contain;
+    object-position: bottom center;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .feature-section {
+      padding: 0 20px;
+    }
+
+    .orange-card {
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .card-content {
+      flex: none;
+      padding: 48px 32px 20px;
+    }
+
+    .card-image {
+      flex: none;
+      height: 260px;
+    }
+
+    .card-image img {
+      max-height: 240px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".feature-section",
+      start: "top 75%",
+      once: true,
+    },
+  });
+
+  tl.fromTo(
+    ".orange-card",
+    { x: "110vw", opacity: 0 },
+    { x: "0%", opacity: 1, duration: 1.0, ease: "power3.out" }
+  ).fromTo(
+    ".card-content > *",
+    { y: 24, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.11 },
+    "-=0.5"
+  );
+</script>

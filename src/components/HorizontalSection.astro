@@ -1,0 +1,213 @@
+---
+---
+
+<section class="hscroll-section">
+  <div class="hscroll-card">
+    <div class="hscroll-content">
+      <span class="label">Dokumenterede resultater</span>
+      <h2>Vi leverer vækst<br>du kan måle</h2>
+      <p>Hvert projekt vi tager på er drevet af data, kreativitet og et dybt fokus på dine forretningsmål.</p>
+      <a href="#" class="cta">Kontakt os i dag →</a>
+    </div>
+    <div class="hscroll-stats">
+      <div class="stat">
+        <strong>150+</strong>
+        <span>Projekter leveret</span>
+      </div>
+      <div class="stat">
+        <strong>98%</strong>
+        <span>Tilfredse kunder</span>
+      </div>
+      <div class="stat">
+        <strong>8 år</strong>
+        <span>I branchen</span>
+      </div>
+      <div class="stat">
+        <strong>3x</strong>
+        <span>Gns. ROI på ads</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hscroll-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8f8;
+    padding: 0 48px;
+  }
+
+  .hscroll-card {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background: #1a1a1a;
+    border-radius: 32px;
+    overflow: hidden;
+    max-width: 980px;
+    width: 100%;
+    min-height: 500px;
+  }
+
+  /* Skåret hjørne øverst til højre — matcher section baggrund */
+  .hscroll-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 26%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, transparent 50%, #f8f8f8 50%);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hscroll-content {
+    flex: 0 0 52%;
+    padding: 72px 48px 72px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+
+  .hscroll-content h2 {
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.12;
+    margin-bottom: 24px;
+  }
+
+  .hscroll-content p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.85;
+    max-width: 380px;
+    margin-bottom: 40px;
+  }
+
+  .cta {
+    align-self: flex-start;
+    color: #f05a24;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(240, 90, 36, 0.4);
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease;
+  }
+
+  .cta:hover {
+    border-color: #f05a24;
+  }
+
+  /* Stats grid */
+  .hscroll-stats {
+    flex: 0 0 48%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    gap: 2px;
+    padding: 48px 72px 48px 24px;
+    padding-right: calc(26% + 24px);
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 28px 20px;
+    border-radius: 16px;
+    transition: background 0.18s ease;
+  }
+
+  .stat:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .stat strong {
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    font-weight: 700;
+    color: #f05a24;
+    line-height: 1;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  .stat span {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.04em;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  @media (max-width: 768px) {
+    .hscroll-section {
+      padding: 0 20px;
+    }
+
+    .hscroll-card {
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .hscroll-content {
+      flex: none;
+      padding: 48px 32px 24px;
+    }
+
+    .hscroll-stats {
+      flex: none;
+      padding: 24px 32px 48px;
+      padding-right: 32px;
+    }
+
+    .hscroll-card::after {
+      width: 35%;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".hscroll-section",
+      pin: true,
+      anticipatePin: 1,
+      start: "top top",
+      end: "+=200%",
+      scrub: 1.5,
+    },
+  });
+
+  tl
+    .fromTo(
+      ".hscroll-card",
+      { x: "100vw", opacity: 0 },
+      { x: "0%", opacity: 1, duration: 1.5, ease: "none" }
+    )
+    .to({}, { duration: 1 })
+    .to(".hscroll-card", { x: "-100vw", opacity: 0, duration: 1.5, ease: "none" });
+</script>

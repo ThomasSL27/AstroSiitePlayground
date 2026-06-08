@@ -1,0 +1,3 @@
+# Bloker al indeksering — intet på dette site må crawles eller indekseres
+User-agent: *
+Disallow: /

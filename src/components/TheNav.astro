@@ -1,0 +1,397 @@
+---
+import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
+---
+
+<nav id="the-nav">
+  <a href="/" class="nav-logo">
+    <img src={logoSrc} alt="Siite" />
+  </a>
+
+  <ul class="nav-links">
+    <li class="has-mega">
+      <a href="#" class="nav-link-item">
+        Ydelser
+        <i class="fa-solid fa-chevron-down chevron"></i>
+      </a>
+
+      <!-- Mega menu -->
+      <div class="mega-menu" role="region" aria-label="Ydelser menu">
+        <div class="mega-panel">
+
+          <div class="mega-col">
+            <p class="col-title">Web</p>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-display"></i></span>
+              <span class="item-text">
+                <strong>Webdesign</strong>
+                <span>Smukke, hurtige hjemmesider der konverterer</span>
+              </span>
+            </a>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-cart-shopping"></i></span>
+              <span class="item-text">
+                <strong>E-handel</strong>
+                <span>Webshops der forvandler besøgende til kunder</span>
+              </span>
+            </a>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+              <span class="item-text">
+                <strong>Vedligeholdelse</strong>
+                <span>Teknisk support og månedlig pleje</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="mega-col">
+            <p class="col-title">Marketing</p>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <span class="item-text">
+                <strong>SEO</strong>
+                <span>Kom organisk øverst i Google</span>
+              </span>
+            </a>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-chart-line"></i></span>
+              <span class="item-text">
+                <strong>Google Ads</strong>
+                <span>Betalt annoncering med målbare resultater</span>
+              </span>
+            </a>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-brands fa-instagram"></i></span>
+              <span class="item-text">
+                <strong>Social Media</strong>
+                <span>Engager din målgruppe på alle platforme</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="mega-col">
+            <p class="col-title">Branding</p>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-pen-nib"></i></span>
+              <span class="item-text">
+                <strong>Logo Design</strong>
+                <span>Unikke logoer der fortæller din historie</span>
+              </span>
+            </a>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-palette"></i></span>
+              <span class="item-text">
+                <strong>Brand Identity</strong>
+                <span>Komplet visuel identitet fra a til z</span>
+              </span>
+            </a>
+            <a href="#" class="mega-item">
+              <span class="icon-wrap"><i class="fa-solid fa-lightbulb"></i></span>
+              <span class="item-text">
+                <strong>Strategi</strong>
+                <span>Data-drevet brandstrategi der virker</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="mega-footer">
+            <a href="#" class="mega-cta">
+              Se alle ydelser
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </li>
+
+    <li><a href="#" class="nav-link-item">Cases</a></li>
+    <li><a href="#" class="nav-link-item">Om Os</a></li>
+    <li><a href="#" class="nav-link-item contact-btn">Kontakt</a></li>
+  </ul>
+</nav>
+
+<style>
+  #the-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 48px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 24px rgba(0, 0, 0, 0.07);
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  .nav-logo img {
+    width: 90px;
+    height: auto;
+    display: block;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .nav-link-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    color: #222;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+
+  .nav-link-item:hover {
+    background: #fff3ee;
+    color: #f05a24;
+  }
+
+  .contact-btn {
+    background: #f05a24;
+    color: #fff !important;
+    padding: 9px 20px;
+  }
+
+  .contact-btn:hover {
+    background: #d94e1e !important;
+    color: #fff !important;
+  }
+
+  .chevron {
+    font-size: 0.65rem;
+    transition: transform 0.25s ease;
+  }
+
+  .has-mega:hover .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ─── Mega menu wrapper ─── */
+  .mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding-top: 10px;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* ─── Mega panel ─── */
+  .mega-panel {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 36px 40px 28px;
+    width: 820px;
+    max-width: calc(100vw - 96px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    pointer-events: auto;
+    opacity: 0;
+  }
+
+  .col-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #f05a24;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid #f9e4dc;
+  }
+
+  .mega-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 11px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.16s ease;
+    margin-bottom: 2px;
+  }
+
+  .mega-item:hover {
+    background: #fff6f2;
+  }
+
+  .mega-item:hover .icon-wrap {
+    background: #f05a24;
+    color: #fff;
+  }
+
+  .icon-wrap {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: #fff3ee;
+    color: #f05a24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: background 0.16s ease, color 0.16s ease;
+  }
+
+  .item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .item-text strong {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  .item-text span {
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.5;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  /* ─── Footer row ─── */
+  .mega-footer {
+    grid-column: 1 / -1;
+    border-top: 1.5px solid #f2f2f2;
+    margin-top: 16px;
+    padding-top: 18px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .mega-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #f05a24;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background 0.16s ease;
+  }
+
+  .mega-cta:hover {
+    background: #fff3ee;
+  }
+
+  .mega-cta i {
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+  }
+
+  .mega-cta:hover i {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    #the-nav {
+      padding: 12px 20px;
+    }
+    .nav-links {
+      gap: 4px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ─── Nav reveal on scroll ─── */
+  ScrollTrigger.create({
+    start: "top -60",
+    onEnter: () => {
+      gsap.to("#the-nav", { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
+    },
+    onLeaveBack: () => {
+      gsap.to("#the-nav", { opacity: 0, y: "-100%", duration: 0.4, ease: "power3.in" });
+    },
+  });
+
+  /* ─── Mega menu ─── */
+  const hasMega = document.querySelector(".has-mega")!;
+  const megaMenu = hasMega.querySelector(".mega-menu") as HTMLElement;
+  const megaPanel = hasMega.querySelector(".mega-panel") as HTMLElement;
+  const megaItems = hasMega.querySelectorAll(".mega-item");
+
+  let isOpen = false;
+  let closeTween: gsap.core.Tween | null = null;
+  let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function openMega() {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (closeTween) { closeTween.kill(); closeTween = null; }
+    if (isOpen) return;
+    isOpen = true;
+    gsap.set(megaMenu, { visibility: "visible", pointerEvents: "auto" });
+    const tl = gsap.timeline();
+    tl.fromTo(
+      megaPanel,
+      { opacity: 0, y: -14, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" }
+    ).fromTo(
+      megaItems,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.22, stagger: 0.04, ease: "power2.out" },
+      "-=0.18"
+    );
+  }
+
+  function closeMega() {
+    // Kort delay forhindrer flicker når musen krydser grænsen til mega-panelet
+    closeTimer = setTimeout(() => {
+      closeTimer = null;
+      if (!isOpen) return;
+      isOpen = false;
+      closeTween = gsap.to(megaPanel, {
+        opacity: 0,
+        y: -10,
+        scale: 0.98,
+        duration: 0.2,
+        ease: "power2.in",
+        onComplete: () => {
+          gsap.set(megaMenu, { visibility: "hidden", pointerEvents: "none" });
+          gsap.set(megaPanel, { clearProps: "all" });
+          gsap.set(megaItems, { clearProps: "all" });
+        },
+      });
+    }, 80);
+  }
+
+  hasMega.addEventListener("mouseenter", openMega);
+  hasMega.addEventListener("mouseleave", closeMega);
+</script>

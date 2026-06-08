@@ -1,8 +1,14 @@
 ---
 import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
+
+interface Props {
+  /** When false, the nav is shown immediately instead of revealing on scroll. */
+  revealOnScroll?: boolean;
+}
+const { revealOnScroll = true } = Astro.props;
 ---
 
-<nav id="the-nav">
+<nav id="the-nav" class:list={[{ 'is-static': !revealOnScroll }]} data-reveal={String(revealOnScroll)}>
   <a href="/" class="nav-logo">
     <img src={logoSrc} alt="Siite" />
   </a>
@@ -102,6 +108,7 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     </li>
 
     <li><a href="#" class="nav-link-item">Cases</a></li>
+    <li><a href="/team" class="nav-link-item">Team</a></li>
     <li><a href="#" class="nav-link-item">Om Os</a></li>
     <li><a href="#" class="nav-link-item contact-btn">Kontakt</a></li>
   </ul>
@@ -133,6 +140,7 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
       </ul>
     </li>
     <li><a href="#" class="mobile-link">Cases</a></li>
+    <li><a href="/team" class="mobile-link">Team</a></li>
     <li><a href="#" class="mobile-link">Om Os</a></li>
     <li><a href="#" class="mobile-link mobile-contact">Kontakt</a></li>
   </ul>
@@ -155,6 +163,12 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     box-shadow: 0 1px 24px rgba(0, 0, 0, 0.07);
     opacity: 0;
     transform: translateY(-100%);
+  }
+
+  /* Interior pages: nav is visible from the start (no scroll reveal). */
+  #the-nav.is-static {
+    opacity: 1;
+    transform: none;
   }
 
   .nav-logo img {
@@ -537,16 +551,21 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
   setNavH();
   window.addEventListener("resize", setNavH);
 
-  /* ─── Nav reveal on scroll ─── */
-  ScrollTrigger.create({
-    start: "top -60",
-    onEnter: () => {
-      gsap.to("#the-nav", { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
-    },
-    onLeaveBack: () => {
-      gsap.to("#the-nav", { opacity: 0, y: "-100%", duration: 0.4, ease: "power3.in" });
-    },
-  });
+  /* ─── Nav reveal on scroll (kun på forsiden) ─── */
+  const revealOnScroll = navEl.dataset.reveal !== "false";
+  if (revealOnScroll) {
+    ScrollTrigger.create({
+      start: "top -60",
+      onEnter: () => {
+        gsap.to("#the-nav", { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
+      },
+      onLeaveBack: () => {
+        gsap.to("#the-nav", { opacity: 0, y: "-100%", duration: 0.4, ease: "power3.in" });
+      },
+    });
+  } else {
+    gsap.set("#the-nav", { opacity: 1, y: 0 });
+  }
 
   /* ─── Mega menu (desktop) ─── */
   const hasMega = document.querySelector(".has-mega")!;

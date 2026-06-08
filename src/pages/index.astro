@@ -14,8 +14,28 @@ import TheFooter from '../components/TheFooter.astro';
   <TheNav revealOnScroll={false} />
 
   <section id="hero">
+    <!-- Background blobs -->
+    <div class="hero-bg" aria-hidden="true">
+      <div class="bg-blob bg-blob-1"></div>
+      <div class="bg-blob bg-blob-2"></div>
+    </div>
+
+    <!-- Floating service pills -->
+    <div class="hero-pills" aria-hidden="true">
+      <span class="hero-pill"><i class="fa-solid fa-display"></i> Webdesign</span>
+      <span class="hero-pill"><i class="fa-solid fa-magnifying-glass"></i> SEO</span>
+      <span class="hero-pill"><i class="fa-solid fa-chart-line"></i> Performance</span>
+      <span class="hero-pill"><i class="fa-brands fa-instagram"></i> Social Media</span>
+      <span class="hero-pill"><i class="fa-solid fa-pen-nib"></i> Branding</span>
+    </div>
+
     <img id="logo" src={logoSrc} alt="Siite logo" fetchpriority="high" decoding="async" />
     <h1 id="tagline"></h1>
+    <p id="hero-sub">Vi hjælper ambitiøse virksomheder med at vokse online</p>
+    <div id="hero-cta">
+      <a href="/kontakt" class="btn-primary">Kom i gang <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
     <div id="scroll-indicator">
       <span class="scroll-label">Scroll</span>
       <div class="scroll-chevrons" aria-hidden="true">
@@ -42,15 +62,88 @@ import TheFooter from '../components/TheFooter.astro';
     height: 100vh;
     height: 100dvh;
     padding: 0 1em;
+    overflow: hidden;
   }
 
+  /* ── Background blobs ── */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(72px);
+  }
+
+  .bg-blob-1 {
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, rgba(240, 90, 36, 0.11) 0%, transparent 70%);
+    bottom: -80px;
+    right: -80px;
+  }
+
+  .bg-blob-2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(240, 90, 36, 0.08) 0%, transparent 70%);
+    top: 5%;
+    left: -60px;
+  }
+
+  /* ── Service pills ── */
+  .hero-pills {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-pill {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    background: #fff;
+    border: 1.5px solid #f0e8e4;
+    border-radius: 999px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  .hero-pill i {
+    color: #f05a24;
+    font-size: 0.68rem;
+  }
+
+  .hero-pill:nth-child(1) { top: 24%; left: 8%; }
+  .hero-pill:nth-child(2) { top: 20%; right: 9%; }
+  .hero-pill:nth-child(3) { top: 56%; left: 6%; }
+  .hero-pill:nth-child(4) { top: 62%; right: 8%; }
+  .hero-pill:nth-child(5) { top: 40%; right: 13%; }
+
+  /* ── Core content ── */
   #logo {
+    position: relative;
+    z-index: 2;
     width: 220px;
     height: auto;
     visibility: hidden;
   }
 
   #tagline {
+    position: relative;
+    z-index: 2;
     margin-top: 20px;
     font-family: 'Comfortaa', cursive;
     font-size: 80px;
@@ -61,6 +154,57 @@ import TheFooter from '../components/TheFooter.astro';
     text-align: center;
   }
 
+  #hero-sub {
+    position: relative;
+    z-index: 2;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.05rem;
+    color: #888;
+    margin-top: 14px;
+    text-align: center;
+    max-width: 420px;
+    line-height: 1.7;
+    opacity: 0;
+  }
+
+  #hero-cta {
+    position: relative;
+    z-index: 2;
+    margin-top: 32px;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 30px;
+    background: #f05a24;
+    color: #fff;
+    border-radius: 999px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(240, 90, 36, 0.35);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: #d44e1c;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(240, 90, 36, 0.42);
+  }
+
+  .btn-primary i {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-primary:hover i {
+    transform: translateX(3px);
+  }
+
+  /* ── Scroll indicator ── */
   #scroll-indicator {
     position: absolute;
     bottom: 44px;
@@ -73,6 +217,7 @@ import TheFooter from '../components/TheFooter.astro';
     opacity: 0;
     pointer-events: none;
     white-space: nowrap;
+    z-index: 2;
   }
 
   .scroll-label {
@@ -98,10 +243,11 @@ import TheFooter from '../components/TheFooter.astro';
     margin-top: -3px;
   }
 
+  @media (max-width: 1100px) {
+    .hero-pills { display: none; }
+  }
+
   @media (max-width: 768px) {
-    #hero {
-      padding: 0 1em;
-    }
     #logo {
       width: clamp(120px, 38vw, 160px);
     }
@@ -112,6 +258,10 @@ import TheFooter from '../components/TheFooter.astro';
       line-height: 1.2;
       max-width: 100%;
       overflow-wrap: break-word;
+    }
+    #hero-sub {
+      font-size: 0.9rem;
+      max-width: 300px;
     }
     #scroll-indicator {
       bottom: max(28px, env(safe-area-inset-bottom));
@@ -155,8 +305,15 @@ import TheFooter from '../components/TheFooter.astro';
     if (reduce) {
       tagline.textContent = "Dit Web- og Marketingbureau";
       gsap.set("#scroll-indicator", { opacity: 1 });
+      gsap.set("#hero-sub", { opacity: 1 });
+      gsap.set("#hero-cta", { opacity: 1 });
       return;
     }
+
+    // Sæt udgangstilstande
+    gsap.set("#hero-sub", { opacity: 0, y: 10 });
+    gsap.set("#hero-cta", { opacity: 0, y: 10 });
+    gsap.set(".hero-pill", { opacity: 0, y: -10 });
 
     // Intro-animation
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -178,6 +335,14 @@ import TheFooter from '../components/TheFooter.astro';
         speed: 0.45,
       },
     }, "+=0.2");
+    tl.to("#hero-sub", { opacity: 1, y: 0, duration: 0.55 }, "+=0.1");
+    tl.to("#hero-cta", { opacity: 1, y: 0, duration: 0.45 }, "-=0.3");
+    tl.to(".hero-pill", {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      stagger: 0.1,
+    }, "-=0.3");
     tl.to("#scroll-indicator", {
       opacity: 1,
       duration: 0.6,
@@ -190,8 +355,19 @@ import TheFooter from '../components/TheFooter.astro';
           duration: 0.6,
           ease: "sine.inOut",
         });
+        // Blød flydende bevægelse på pills
+        document.querySelectorAll<HTMLElement>('.hero-pill').forEach((pill, i) => {
+          gsap.to(pill, {
+            y: `+=${5 + i * 1.2}`,
+            duration: 2.2 + i * 0.35,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: i * 0.25,
+          });
+        });
       },
-    }, "+=0.35");
+    }, "-=0.1");
 
     // Hero fader ud ved scroll
     gsap.to("#hero", {

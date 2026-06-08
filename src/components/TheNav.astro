@@ -500,9 +500,12 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
   @media (max-width: 768px) {
     #the-nav {
       padding: 12px 20px;
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
     }
 
-    .nav-links {
+    .nav-links,
+    .mega-menu {
       display: none;
     }
 
@@ -512,6 +515,10 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
 
     #mobile-menu {
       display: block;
+      max-height: 100dvh;
+      padding-left: max(24px, env(safe-area-inset-left));
+      padding-right: max(24px, env(safe-area-inset-right));
+      padding-bottom: max(32px, env(safe-area-inset-bottom));
     }
   }
 </style>

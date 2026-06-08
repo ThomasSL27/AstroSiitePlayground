@@ -36,7 +36,7 @@
 <style>
   .why-section {
     background: #ffffff;
-    padding: 140px 1em 160px;
+    padding: 140px clamp(20px, 4vw, 48px) 160px;
     position: relative;
     overflow: hidden;
   }
@@ -54,7 +54,7 @@
   }
 
   .why-inner {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -182,7 +182,7 @@
 
   @media (max-width: 900px) {
     .why-section {
-      padding: 90px 1em 100px;
+      padding: 90px clamp(20px, 4vw, 48px) 100px;
     }
 
     .why-grid {

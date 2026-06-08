@@ -156,7 +156,7 @@ const { revealOnScroll = true } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 1em;
+    padding: 14px 48px;
     background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -408,7 +408,7 @@ const { revealOnScroll = true } = Astro.props;
     right: 0;
     z-index: 99;
     background: #fff;
-    padding: 0 1em 32px;
+    padding: 0 24px 32px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transform: translateY(-110%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -513,9 +513,9 @@ const { revealOnScroll = true } = Astro.props;
   /* ─── Responsive ─── */
   @media (max-width: 768px) {
     #the-nav {
-      padding: 12px 1em;
-      padding-left: max(1em, env(safe-area-inset-left));
-      padding-right: max(1em, env(safe-area-inset-right));
+      padding: 12px 20px;
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
     }
 
     .nav-links,
@@ -530,8 +530,8 @@ const { revealOnScroll = true } = Astro.props;
     #mobile-menu {
       display: block;
       max-height: 100dvh;
-      padding-left: max(1em, env(safe-area-inset-left));
-      padding-right: max(1em, env(safe-area-inset-right));
+      padding-left: max(24px, env(safe-area-inset-left));
+      padding-right: max(24px, env(safe-area-inset-right));
       padding-bottom: max(32px, env(safe-area-inset-bottom));
     }
   }

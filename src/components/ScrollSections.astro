@@ -296,104 +296,110 @@ import christianSrc from '../assets/Christian_Isolated.webp?url';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Counter-animation
-  let countersStarted = false;
+  function initScrollSections() {
+    const section = document.querySelector(".h-section");
+    if (!section) return; // Sektionen findes kun på forsiden
 
-  function runCounters() {
-    const c1 = document.getElementById("c1")!;
-    const obj1 = { val: 0 };
-    gsap.to(obj1, {
-      val: 30, duration: 1.8, ease: "power2.out",
-      onUpdate: () => { c1.textContent = Math.round(obj1.val).toString(); },
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let countersStarted = false;
+    function runCounters() {
+      const c1 = document.getElementById("c1");
+      const c2 = document.getElementById("c2");
+      const c3 = document.getElementById("c3");
+      if (!c1 || !c2 || !c3) return;
+
+      const obj1 = { val: 0 };
+      gsap.to(obj1, {
+        val: 30, duration: 1.8, ease: "power2.out",
+        onUpdate: () => { c1.textContent = Math.round(obj1.val).toString(); },
+      });
+      const obj2 = { val: 0 };
+      gsap.to(obj2, {
+        val: 800, duration: 2.2, ease: "power2.out",
+        onUpdate: () => { c2.textContent = Math.round(obj2.val) + "+"; },
+      });
+      const obj3 = { val: 0 };
+      gsap.to(obj3, {
+        val: 4.9, duration: 1.6, ease: "power2.out",
+        onUpdate: () => { c3.textContent = obj3.val.toFixed(1); },
+      });
+    }
+
+    const mm = gsap.matchMedia();
+
+    // ── Desktop: første kort animerer ind + horisontal scroll ──
+    mm.add("(min-width: 769px)", () => {
+      if (!reduce) {
+        gsap.from(".orange-card", {
+          x: "100vw",
+          opacity: 0,
+          duration: 1.0,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ".h-section", start: "top 70%", once: true },
+        });
+      }
+
+      const track = document.querySelector(".h-track") as HTMLElement;
+      const distance = () => track.scrollWidth - window.innerWidth;
+
+      const hTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".h-section",
+          pin: true,
+          anticipatePin: 1,
+          start: "top top",
+          end: () => "+=" + (distance() + window.innerHeight * 0.6),
+          scrub: 0.8,
+          invalidateOnRefresh: true,
+          onUpdate(self) {
+            if (!countersStarted && self.progress >= 0.55) {
+              countersStarted = true;
+              runCounters();
+            }
+          },
+        },
+      });
+
+      hTl
+        .to(track, { x: () => -distance(), ease: "none", duration: 1 })
+        .to({}, { duration: 0.45 });
+
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(() => ScrollTrigger.refresh());
+      }
+      ScrollTrigger.refresh();
     });
 
-    const c2 = document.getElementById("c2")!;
-    const obj2 = { val: 0 };
-    gsap.to(obj2, {
-      val: 800, duration: 2.2, ease: "power2.out",
-      onUpdate: () => { c2.textContent = Math.round(obj2.val) + "+"; },
-    });
+    // ── Mobil: counters starter ved simpelt scroll ──
+    mm.add("(max-width: 768px)", () => {
+      if (!reduce) {
+        gsap.from(".orange-card, .orange-card-2", {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: { trigger: ".h-section", start: "top 80%", once: true },
+        });
+      }
 
-    const c3 = document.getElementById("c3")!;
-    const obj3 = { val: 0 };
-    gsap.to(obj3, {
-      val: 4.9, duration: 1.6, ease: "power2.out",
-      onUpdate: () => { c3.textContent = obj3.val.toFixed(1); },
-    });
-  }
-
-  const mm = gsap.matchMedia();
-
-  // ── Desktop: første kort animerer ind + horisontal scroll ──
-  mm.add("(min-width: 769px)", () => {
-    gsap.from(".orange-card", {
-      x: "100vw",
-      opacity: 0,
-      duration: 1.0,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".h-section",
-        start: "top 70%",
+      ScrollTrigger.create({
+        trigger: ".orange-card-2",
+        start: "top 75%",
         once: true,
-      },
-    });
-
-    const track = document.querySelector(".h-track") as HTMLElement;
-    const distance = () => track.scrollWidth - window.innerWidth;
-
-    const hTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".h-section",
-        pin: true,
-        anticipatePin: 1,
-        start: "top top",
-        end: () => "+=" + (distance() + window.innerHeight * 0.6),
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        onUpdate(self) {
-          if (!countersStarted && self.progress >= 0.55) {
+        onEnter: () => {
+          if (!countersStarted) {
             countersStarted = true;
             runCounters();
           }
         },
-      },
+      });
     });
 
-    hTl
-      .to(track, { x: () => -distance(), ease: "none", duration: 1 })
-      .to({}, { duration: 0.45 });
+    // Ryd matchMedia-kontekst inden sideskift
+    document.addEventListener("astro:before-swap", () => mm.revert(), { once: true });
+  }
 
-    window.addEventListener("load", () => ScrollTrigger.refresh());
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(() => ScrollTrigger.refresh());
-    }
-  });
-
-  // ── Mobil: counters starter ved simpelt scroll ──
-  mm.add("(max-width: 768px)", () => {
-    gsap.from(".orange-card, .orange-card-2", {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out",
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: ".h-section",
-        start: "top 80%",
-        once: true,
-      },
-    });
-
-    ScrollTrigger.create({
-      trigger: ".orange-card-2",
-      start: "top 75%",
-      once: true,
-      onEnter: () => {
-        if (!countersStarted) {
-          countersStarted = true;
-          runCounters();
-        }
-      },
-    });
-  });
+  document.addEventListener("astro:page-load", initScrollSections);
 </script>

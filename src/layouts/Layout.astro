@@ -1,28 +1,64 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+
 interface Props {
   title?: string;
+  description?: string;
 }
-const { title = 'Siite' } = Astro.props;
+
+const {
+  title = 'Siite — Dit Web- og Marketingbureau',
+  description = 'Siite er dit web- og marketingbureau. Vi hjælper ambitiøse virksomheder med at vokse online – fra webdesign og branding til performance-marketing der skaber resultater.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.url.origin).href;
 ---
 
 <html lang="da">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Primær SEO -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f05a24" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Siite" />
+    <meta property="og:locale" content="da_DK" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Ikoner (preconnect så CDN'en åbnes hurtigere) -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+
+    <!-- Smooth page transitions -->
+    <ClientRouter />
+
     <style is:global>
       *,
       *::before,
@@ -43,9 +79,42 @@ const { title = 'Siite' } = Astro.props;
         font-family: 'Comfortaa', cursive;
         background: #ffffff;
       }
+
+      /* Synligt tastatur-fokus (a11y) */
+      :focus-visible {
+        outline: 2.5px solid #f05a24;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      /* Respektér brugere der foretrækker mindre bevægelse (a11y) */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
     </style>
   </head>
   <body>
     <slot />
+
+    <script>
+      // Central GSAP-oprydning ved sideskift, så ScrollTriggers/tweens
+      // ikke peger på DOM-noder der bliver erstattet af View Transitions.
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.addEventListener('astro:before-swap', () => {
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+        gsap.globalTimeline.getChildren(true, true, true).forEach((c) => c.kill());
+      });
+    </script>
   </body>
 </html>

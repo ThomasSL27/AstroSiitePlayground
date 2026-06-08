@@ -543,106 +543,121 @@ const { revealOnScroll = true } = Astro.props;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ─── Nav-højde som CSS-variabel (bruges af mobilmenu padding) ─── */
-  const navEl = document.getElementById("the-nav") as HTMLElement;
-  const setNavH = () => {
-    document.documentElement.style.setProperty("--nav-h", navEl.offsetHeight + "px");
-  };
-  setNavH();
-  window.addEventListener("resize", setNavH);
+  function initNav() {
+    const navEl = document.getElementById("the-nav") as HTMLElement | null;
+    if (!navEl) return;
 
-  /* ─── Nav reveal on scroll (kun på forsiden) ─── */
-  const revealOnScroll = navEl.dataset.reveal !== "false";
-  if (revealOnScroll) {
-    ScrollTrigger.create({
-      start: "top -60",
-      onEnter: () => {
-        gsap.to("#the-nav", { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
-      },
-      onLeaveBack: () => {
-        gsap.to("#the-nav", { opacity: 0, y: "-100%", duration: 0.4, ease: "power3.in" });
-      },
-    });
-  } else {
-    gsap.set("#the-nav", { opacity: 1, y: 0 });
-  }
-
-  /* ─── Mega menu (desktop) ─── */
-  const hasMega = document.querySelector(".has-mega")!;
-  const megaMenu = hasMega.querySelector(".mega-menu") as HTMLElement;
-  const megaPanel = hasMega.querySelector(".mega-panel") as HTMLElement;
-  const megaItems = hasMega.querySelectorAll(".mega-item");
-
-  let isOpen = false;
-  let closeTween: gsap.core.Tween | null = null;
-  let closeTimer: ReturnType<typeof setTimeout> | null = null;
-
-  function openMega() {
-    if (window.innerWidth <= 768) return;
-    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-    if (closeTween) { closeTween.kill(); closeTween = null; }
-    if (isOpen) return;
-    isOpen = true;
-    gsap.set(megaMenu, { visibility: "visible", pointerEvents: "auto" });
-    const tl = gsap.timeline();
-    tl.fromTo(
-      megaPanel,
-      { opacity: 0, y: -14, scale: 0.98 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" }
-    ).fromTo(
-      megaItems,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.22, stagger: 0.04, ease: "power2.out" },
-      "-=0.18"
+    /* ─── Nav-højde som CSS-variabel (bruges af mobilmenu padding) ─── */
+    const setNavH = () => {
+      document.documentElement.style.setProperty("--nav-h", navEl.offsetHeight + "px");
+    };
+    setNavH();
+    window.addEventListener("resize", setNavH);
+    document.addEventListener(
+      "astro:before-swap",
+      () => window.removeEventListener("resize", setNavH),
+      { once: true }
     );
-  }
 
-  function closeMega() {
-    closeTimer = setTimeout(() => {
-      closeTimer = null;
-      if (!isOpen) return;
-      isOpen = false;
-      closeTween = gsap.to(megaPanel, {
-        opacity: 0,
-        y: -10,
-        scale: 0.98,
-        duration: 0.2,
-        ease: "power2.in",
-        onComplete: () => {
-          gsap.set(megaMenu, { visibility: "hidden", pointerEvents: "none" });
-          gsap.set(megaPanel, { clearProps: "all" });
-          gsap.set(megaItems, { clearProps: "all" });
+    /* ─── Nav reveal on scroll (kun hvis aktiveret) ─── */
+    const revealOnScroll = navEl.dataset.reveal !== "false";
+    if (revealOnScroll) {
+      ScrollTrigger.create({
+        start: "top -60",
+        onEnter: () => {
+          gsap.to(navEl, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" });
+        },
+        onLeaveBack: () => {
+          gsap.to(navEl, { opacity: 0, y: "-100%", duration: 0.4, ease: "power3.in" });
         },
       });
-    }, 80);
+    } else {
+      gsap.set(navEl, { opacity: 1, y: 0 });
+    }
+
+    /* ─── Mega menu (desktop) ─── */
+    const hasMega = document.querySelector(".has-mega");
+    if (hasMega) {
+      const megaMenu = hasMega.querySelector(".mega-menu") as HTMLElement;
+      const megaPanel = hasMega.querySelector(".mega-panel") as HTMLElement;
+      const megaItems = hasMega.querySelectorAll(".mega-item");
+
+      let isOpen = false;
+      let closeTween: gsap.core.Tween | null = null;
+      let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+      const openMega = () => {
+        if (window.innerWidth <= 768) return;
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        if (closeTween) { closeTween.kill(); closeTween = null; }
+        if (isOpen) return;
+        isOpen = true;
+        gsap.set(megaMenu, { visibility: "visible", pointerEvents: "auto" });
+        const tl = gsap.timeline();
+        tl.fromTo(
+          megaPanel,
+          { opacity: 0, y: -14, scale: 0.98 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" }
+        ).fromTo(
+          megaItems,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.22, stagger: 0.04, ease: "power2.out" },
+          "-=0.18"
+        );
+      };
+
+      const closeMega = () => {
+        closeTimer = setTimeout(() => {
+          closeTimer = null;
+          if (!isOpen) return;
+          isOpen = false;
+          closeTween = gsap.to(megaPanel, {
+            opacity: 0,
+            y: -10,
+            scale: 0.98,
+            duration: 0.2,
+            ease: "power2.in",
+            onComplete: () => {
+              gsap.set(megaMenu, { visibility: "hidden", pointerEvents: "none" });
+              gsap.set(megaPanel, { clearProps: "all" });
+              gsap.set(megaItems, { clearProps: "all" });
+            },
+          });
+        }, 80);
+      };
+
+      hasMega.addEventListener("mouseenter", openMega);
+      hasMega.addEventListener("mouseleave", closeMega);
+    }
+
+    /* ─── Hamburger + mobile menu ─── */
+    const hamburger = document.getElementById("nav-hamburger");
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener("click", () => {
+        const open = hamburger.classList.toggle("is-open");
+        hamburger.setAttribute("aria-expanded", String(open));
+        if (open) {
+          mobileMenu.classList.add("is-open");
+          document.body.style.overflow = "hidden";
+        } else {
+          mobileMenu.classList.remove("is-open");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+
+    /* ─── Mobile accordion (Ydelser) ─── */
+    const accordion = document.querySelector(".mobile-accordion");
+    if (accordion) {
+      const mobileSub = accordion.nextElementSibling as HTMLElement;
+      accordion.addEventListener("click", () => {
+        const open = accordion.classList.toggle("is-open");
+        accordion.setAttribute("aria-expanded", String(open));
+        mobileSub.classList.toggle("is-open", open);
+      });
+    }
   }
 
-  hasMega.addEventListener("mouseenter", openMega);
-  hasMega.addEventListener("mouseleave", closeMega);
-
-  /* ─── Hamburger + mobile menu ─── */
-  const hamburger = document.getElementById("nav-hamburger")!;
-  const mobileMenu = document.getElementById("mobile-menu")!;
-
-  hamburger.addEventListener("click", () => {
-    const open = hamburger.classList.toggle("is-open");
-    hamburger.setAttribute("aria-expanded", String(open));
-    if (open) {
-      mobileMenu.classList.add("is-open");
-      document.body.style.overflow = "hidden";
-    } else {
-      mobileMenu.classList.remove("is-open");
-      document.body.style.overflow = "";
-    }
-  });
-
-  /* ─── Mobile accordion (Ydelser) ─── */
-  const accordion = document.querySelector(".mobile-accordion")!;
-  const mobileSub = accordion.nextElementSibling as HTMLElement;
-
-  accordion.addEventListener("click", () => {
-    const open = accordion.classList.toggle("is-open");
-    accordion.setAttribute("aria-expanded", String(open));
-    mobileSub.classList.toggle("is-open", open);
-  });
+  document.addEventListener("astro:page-load", initNav);
 </script>

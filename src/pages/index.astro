@@ -1,283 +1,270 @@
 ---
 import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
+import Layout from '../layouts/Layout.astro';
 import TheNav from '../components/TheNav.astro';
 import ScrollSections from '../components/ScrollSections.astro';
 import WhySiite from '../components/WhySiite.astro';
 ---
 
-<html lang="da">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Siite</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <style is:global>
-      *, *::before, *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<Layout
+  title="Siite — Dit Web- og Marketingbureau"
+  description="Siite er dit web- og marketingbureau. Vi hjælper ambitiøse virksomheder med at vokse online – fra webdesign og branding til performance-marketing der skaber resultater."
+>
+  <TheNav revealOnScroll={false} />
 
-      html, body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-
-      body {
-        font-family: 'Comfortaa', cursive;
-        background: #ffffff;
-      }
-    </style>
-    <style>
-      #hero {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100vh;
-        height: 100dvh;
-        padding: 0 24px;
-      }
-
-      #logo {
-        width: 220px;
-        height: auto;
-        visibility: hidden;
-      }
-
-      #tagline {
-        margin-top: 20px;
-        font-family: 'Comfortaa', cursive;
-        font-size: 80px;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        color: #222;
-        min-height: 1.2em;
-        text-align: center;
-      }
-
-      #scroll-indicator {
-        position: absolute;
-        bottom: 44px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        opacity: 0;
-        pointer-events: none;
-        white-space: nowrap;
-      }
-
-      .scroll-label {
-        font-family: 'Comfortaa', cursive;
-        font-size: 0.58rem;
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        color: #bbb;
-        font-weight: 600;
-      }
-
-      .scroll-chevrons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #f05a24;
-        font-size: 0.8rem;
-        line-height: 1.1;
-      }
-
-      .scroll-chevrons i:last-child {
-        opacity: 0.3;
-        margin-top: -3px;
-      }
-
-      @media (max-width: 768px) {
-        #hero {
-          padding: 0 24px;
-        }
-        #logo {
-          width: clamp(120px, 38vw, 160px);
-        }
-        #tagline {
-          margin-top: 16px;
-          font-size: clamp(1.6rem, 8vw, 3rem);
-          min-height: 0;
-          line-height: 1.2;
-          max-width: 100%;
-          overflow-wrap: break-word;
-        }
-        #scroll-indicator {
-          bottom: max(28px, env(safe-area-inset-bottom));
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <TheNav />
-
-    <section id="hero">
-      <img id="logo" src={logoSrc} alt="Siite logo" />
-      <h1 id="tagline"></h1>
-      <div id="scroll-indicator">
-        <span class="scroll-label">Scroll</span>
-        <div class="scroll-chevrons">
-          <i class="fa-solid fa-chevron-down"></i>
-          <i class="fa-solid fa-chevron-down"></i>
-        </div>
+  <section id="hero">
+    <img id="logo" src={logoSrc} alt="Siite logo" fetchpriority="high" decoding="async" />
+    <h1 id="tagline"></h1>
+    <div id="scroll-indicator">
+      <span class="scroll-label">Scroll</span>
+      <div class="scroll-chevrons" aria-hidden="true">
+        <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <ScrollSections />
+  <ScrollSections />
 
-    <WhySiite />
+  <WhySiite />
+</Layout>
 
-    <script>
-      import { gsap } from "gsap";
-      import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
-      import { ScrollTrigger } from "gsap/ScrollTrigger";
+<style>
+  #hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: 0 24px;
+  }
 
-      gsap.registerPlugin(ScrambleTextPlugin, ScrollTrigger);
+  #logo {
+    width: 220px;
+    height: auto;
+    visibility: hidden;
+  }
 
-      const logo = document.getElementById("logo")!;
+  #tagline {
+    margin-top: 20px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #222;
+    min-height: 1.2em;
+    text-align: center;
+  }
 
-      gsap.set(logo, { visibility: "visible" });
+  #scroll-indicator {
+    position: absolute;
+    bottom: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+  }
 
-      // Intro animation
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  .scroll-label {
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.58rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #999;
+    font-weight: 600;
+  }
 
-      tl.from(logo, { opacity: 0, y: 40, duration: 1 });
+  .scroll-chevrons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f05a24;
+    font-size: 0.8rem;
+    line-height: 1.1;
+  }
 
-      tl.to("#tagline", {
-        duration: 0.9,
-        scrambleText: { text: "Siite", chars: "upperCase", speed: 0.6 },
-      }, "-=0.2");
+  .scroll-chevrons i:last-child {
+    opacity: 0.3;
+    margin-top: -3px;
+  }
 
-      tl.to({}, { duration: 0.8 });
+  @media (max-width: 768px) {
+    #hero {
+      padding: 0 24px;
+    }
+    #logo {
+      width: clamp(120px, 38vw, 160px);
+    }
+    #tagline {
+      margin-top: 16px;
+      font-size: clamp(1.6rem, 8vw, 3rem);
+      min-height: 0;
+      line-height: 1.2;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+    #scroll-indicator {
+      bottom: max(28px, env(safe-area-inset-bottom));
+    }
+  }
+</style>
 
-      tl.to("#tagline", {
-        duration: 0.7,
-        scrambleText: { text: "", chars: "upperCase", speed: 0.8 },
-      });
+<script>
+  import { gsap } from "gsap";
+  import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-      tl.to("#tagline", {
-        duration: 1.6,
-        scrambleText: {
-          text: "Dit Web- og Marketingbureau",
-          chars: "lowerCase",
-          speed: 0.45,
-        },
-      }, "+=0.2");
+  gsap.registerPlugin(ScrambleTextPlugin, ScrollTrigger);
 
-      // Scroll indicator fader ind efter scramble er færdig
-      tl.to("#scroll-indicator", {
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-        onComplete() {
-          gsap.to(".scroll-chevrons", {
-            y: 5,
-            repeat: -1,
-            yoyo: true,
-            duration: 0.6,
-            ease: "sine.inOut",
-          });
-        },
-      }, "+=0.35");
+  const iconDefs: [string, string][] = [
+    ["fa-solid", "fa-display"],
+    ["fa-solid", "fa-cart-shopping"],
+    ["fa-solid", "fa-screwdriver-wrench"],
+    ["fa-solid", "fa-magnifying-glass"],
+    ["fa-solid", "fa-chart-line"],
+    ["fa-brands", "fa-instagram"],
+    ["fa-solid", "fa-pen-nib"],
+    ["fa-solid", "fa-palette"],
+    ["fa-solid", "fa-lightbulb"],
+    ["fa-solid", "fa-rocket"],
+    ["fa-solid", "fa-star"],
+    ["fa-solid", "fa-code"],
+  ];
+  const RAIN_COUNT = 18;
 
-      // Hero fader ud ved scroll
-      gsap.to("#hero", {
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#hero",
-          start: "top top",
-          end: "40% top",
-          scrub: 0.6,
-        },
-      });
+  function initHome() {
+    const hero = document.getElementById("hero");
+    const logo = document.getElementById("logo");
+    const tagline = document.getElementById("tagline");
+    if (!hero || !logo || !tagline) return; // Vi er ikke på forsiden
 
-      // Ikonerne flyver ned over skærmen ved første scroll
-      const iconDefs: [string, string][] = [
-        ["fa-solid", "fa-display"],
-        ["fa-solid", "fa-cart-shopping"],
-        ["fa-solid", "fa-screwdriver-wrench"],
-        ["fa-solid", "fa-magnifying-glass"],
-        ["fa-solid", "fa-chart-line"],
-        ["fa-brands", "fa-instagram"],
-        ["fa-solid", "fa-pen-nib"],
-        ["fa-solid", "fa-palette"],
-        ["fa-solid", "fa-lightbulb"],
-        ["fa-solid", "fa-rocket"],
-        ["fa-solid", "fa-star"],
-        ["fa-solid", "fa-code"],
-      ];
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    gsap.set(logo, { visibility: "visible" });
 
-      const RAIN_COUNT = 18;
-      let iconsFired = false;
+    // Reduceret bevægelse: vis slutresultatet uden animation
+    if (reduce) {
+      tagline.textContent = "Dit Web- og Marketingbureau";
+      gsap.set("#scroll-indicator", { opacity: 1 });
+      return;
+    }
 
-      function fireIcons() {
-        if (iconsFired) return;
-        iconsFired = true;
+    // Intro-animation
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.from(logo, { opacity: 0, y: 40, duration: 1 });
+    tl.to("#tagline", {
+      duration: 0.9,
+      scrambleText: { text: "Siite", chars: "upperCase", speed: 0.6 },
+    }, "-=0.2");
+    tl.to({}, { duration: 0.8 });
+    tl.to("#tagline", {
+      duration: 0.7,
+      scrambleText: { text: "", chars: "upperCase", speed: 0.8 },
+    });
+    tl.to("#tagline", {
+      duration: 1.6,
+      scrambleText: {
+        text: "Dit Web- og Marketingbureau",
+        chars: "lowerCase",
+        speed: 0.45,
+      },
+    }, "+=0.2");
+    tl.to("#scroll-indicator", {
+      opacity: 1,
+      duration: 0.6,
+      ease: "power2.out",
+      onComplete() {
+        gsap.to(".scroll-chevrons", {
+          y: 5,
+          repeat: -1,
+          yoyo: true,
+          duration: 0.6,
+          ease: "sine.inOut",
+        });
+      },
+    }, "+=0.35");
 
-        gsap.to("#scroll-indicator", { opacity: 0, duration: 0.2 });
+    // Hero fader ud ved scroll
+    gsap.to("#hero", {
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#hero",
+        start: "top top",
+        end: "40% top",
+        scrub: 0.6,
+      },
+    });
 
-        for (let i = 0; i < RAIN_COUNT; i++) {
-          const [family, name] = iconDefs[i % iconDefs.length];
-          const el = document.createElement("i");
-          el.className = `${family} ${name}`;
-          document.body.appendChild(el);
+    // Ikon-regn ved første scroll
+    let iconsFired = false;
+    function fireIcons() {
+      if (iconsFired) return;
+      iconsFired = true;
 
-          const xPos = 3 + Math.random() * 94;
-          const size = 0.9 + Math.random() * 2.0;
-          const totalDur = 1.0 + Math.random() * 0.9;
-          const delay = i * 0.055 + Math.random() * 0.08;
-          const startRot = Math.random() * 360;
-          const endRot = startRot + (Math.random() * 160 - 80);
-          const peakOpacity = 0.35 + Math.random() * 0.45;
+      gsap.to("#scroll-indicator", { opacity: 0, duration: 0.2 });
 
-          gsap.set(el, {
-            position: "fixed",
-            left: `${xPos}%`,
-            top: "-70px",
-            fontSize: `${size}rem`,
-            color: "#f05a24",
+      for (let i = 0; i < RAIN_COUNT; i++) {
+        const [family, name] = iconDefs[i % iconDefs.length];
+        const el = document.createElement("i");
+        el.className = `${family} ${name}`;
+        el.setAttribute("aria-hidden", "true");
+        document.body.appendChild(el);
+
+        const xPos = 3 + Math.random() * 94;
+        const size = 0.9 + Math.random() * 2.0;
+        const totalDur = 1.0 + Math.random() * 0.9;
+        const delay = i * 0.055 + Math.random() * 0.08;
+        const startRot = Math.random() * 360;
+        const endRot = startRot + (Math.random() * 160 - 80);
+        const peakOpacity = 0.35 + Math.random() * 0.45;
+
+        gsap.set(el, {
+          position: "fixed",
+          left: `${xPos}%`,
+          top: "-70px",
+          fontSize: `${size}rem`,
+          color: "#f05a24",
+          opacity: 0,
+          rotation: startRot,
+          zIndex: 48,
+          pointerEvents: "none",
+        });
+
+        const iconTl = gsap.timeline({ delay, onComplete: () => el.remove() });
+        iconTl
+          .to(el, {
+            y: window.innerHeight * 0.42,
+            opacity: peakOpacity,
+            rotation: endRot,
+            duration: totalDur * 0.38,
+            ease: "power2.out",
+          })
+          .to(el, {
+            y: window.innerHeight + 120,
             opacity: 0,
-            rotation: startRot,
-            zIndex: 48,
-            pointerEvents: "none",
+            rotation: endRot + (Math.random() * 40 - 20),
+            duration: totalDur * 0.62,
+            ease: "power2.in",
           });
-
-          const iconTl = gsap.timeline({ delay, onComplete: () => el.remove() });
-          iconTl
-            .to(el, {
-              y: window.innerHeight * 0.42,
-              opacity: peakOpacity,
-              rotation: endRot,
-              duration: totalDur * 0.38,
-              ease: "power2.out",
-            })
-            .to(el, {
-              y: window.innerHeight + 120,
-              opacity: 0,
-              rotation: endRot + (Math.random() * 40 - 20),
-              duration: totalDur * 0.62,
-              ease: "power2.in",
-            });
-        }
       }
+    }
 
-      window.addEventListener("scroll", fireIcons, { once: true });
-    </script>
-  </body>
-</html>
+    window.addEventListener("scroll", fireIcons, { once: true });
+    // Fjern lytteren igen hvis brugeren forlader siden uden at scrolle
+    document.addEventListener(
+      "astro:before-swap",
+      () => window.removeEventListener("scroll", fireIcons),
+      { once: true }
+    );
+  }
+
+  document.addEventListener("astro:page-load", initHome);
+</script>

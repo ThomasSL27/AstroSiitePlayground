@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import TheNav from '../components/TheNav.astro';
+import heroImg from '../assets/1779109002530.jpeg';
 
 // Alle teambilleder hentes og optimeres af Astro
 const photos = import.meta.glob<ImageMetadata>(
@@ -92,27 +93,41 @@ const teamDepartments = categories.length - 1;
   <main>
     <!-- ─── Hero ─── -->
     <section class="team-hero">
-      <span class="hero-eyebrow">Mød holdet bag din digitale vækst</span>
-      <h1 class="hero-title">Mennesker der<br />driver resultater</h1>
-      <p class="hero-intro">
-        Hos Siite er vi ikke bare en samling freelancere. Vi er et sammentømret
-        hold af eksperter, der hver især brænder for vores felt.
-      </p>
+      <div class="hero-media">
+        <Image
+          src={heroImg}
+          alt="Holdet bag Siite samlet foran kontoret"
+          width={1200}
+          height={800}
+          sizes="(max-width: 900px) 92vw, 60vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
 
-      <div class="hero-stats">
-        <div class="stat">
-          <strong class="stat-val" data-count={teamCount}>0</strong>
-          <span class="stat-label">Specialister</span>
-        </div>
-        <span class="stat-divider"></span>
-        <div class="stat">
-          <strong class="stat-val" data-count={teamDepartments}>0</strong>
-          <span class="stat-label">Afdelinger</span>
-        </div>
-        <span class="stat-divider"></span>
-        <div class="stat">
-          <strong class="stat-val">1</strong>
-          <span class="stat-label">Fælles mission</span>
+      <div class="hero-content">
+        <span class="hero-eyebrow">Mød holdet bag din digitale vækst</span>
+        <h1 class="hero-title">Mennesker der<br />driver resultater</h1>
+        <p class="hero-intro">
+          Hos Siite er vi ikke bare en samling freelancere. Vi er et sammentømret
+          hold af eksperter, der hver især brænder for vores felt.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong class="stat-val" data-count={teamCount}>0</strong>
+            <span class="stat-label">Specialister</span>
+          </div>
+          <span class="stat-divider"></span>
+          <div class="stat">
+            <strong class="stat-val" data-count={teamDepartments}>0</strong>
+            <span class="stat-label">Afdelinger</span>
+          </div>
+          <span class="stat-divider"></span>
+          <div class="stat">
+            <strong class="stat-val">1</strong>
+            <span class="stat-label">Fælles mission</span>
+          </div>
         </div>
       </div>
     </section>
@@ -201,25 +216,44 @@ const teamDepartments = categories.length - 1;
   /* ─── Hero ─── */
   .team-hero {
     position: relative;
-    text-align: center;
-    padding: clamp(120px, 16vh, 180px) 24px 56px;
-    max-width: 820px;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+    gap: clamp(32px, 5vw, 64px);
+    padding: clamp(120px, 15vh, 170px) 24px 64px;
+    max-width: 1200px;
     margin: 0 auto;
-    overflow: hidden;
   }
 
   .team-hero::before {
     content: '';
     position: absolute;
-    top: -120px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 620px;
-    max-width: 120vw;
+    top: 8%;
+    right: -80px;
+    width: 420px;
+    max-width: 60vw;
     height: 420px;
-    background: radial-gradient(circle, rgba(240, 90, 36, 0.12), transparent 68%);
+    background: radial-gradient(circle, rgba(240, 90, 36, 0.14), transparent 68%);
     pointer-events: none;
     z-index: -1;
+  }
+
+  .hero-media {
+    position: relative;
+  }
+
+  .hero-media :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 32px;
+    display: block;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12);
+  }
+
+  .hero-content {
+    text-align: left;
   }
 
   .hero-eyebrow {
@@ -237,7 +271,7 @@ const teamDepartments = categories.length - 1;
   }
 
   .hero-title {
-    font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+    font-size: clamp(2.1rem, 3.4vw, 3.4rem);
     font-weight: 700;
     line-height: 1.12;
     color: #1a1a1a;
@@ -245,8 +279,8 @@ const teamDepartments = categories.length - 1;
   }
 
   .hero-intro {
-    margin: 22px auto 0;
-    max-width: 540px;
+    margin: 22px 0 0;
+    max-width: 460px;
     font-size: 1rem;
     line-height: 1.8;
     color: #777;
@@ -255,15 +289,15 @@ const teamDepartments = categories.length - 1;
   .hero-stats {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: clamp(20px, 5vw, 48px);
-    margin-top: 44px;
+    justify-content: flex-start;
+    gap: clamp(18px, 2.5vw, 36px);
+    margin-top: 40px;
   }
 
   .stat {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 6px;
   }
 
@@ -279,7 +313,7 @@ const teamDepartments = categories.length - 1;
     font-size: 0.7rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #999;
+    color: #6b6b6b;
     font-weight: 600;
   }
 
@@ -435,7 +469,7 @@ const teamDepartments = categories.length - 1;
 
   .card-meta p {
     font-size: 0.78rem;
-    color: #888;
+    color: #6e6e6e;
     margin-top: 5px;
     line-height: 1.4;
     min-height: 2.2em;
@@ -476,10 +510,32 @@ const teamDepartments = categories.length - 1;
     padding: 40px 0;
   }
 
+  /* ─── Hero stakkes på smalle skærme ─── */
+  @media (max-width: 820px) {
+    .team-hero {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      text-align: left;
+    }
+
+    .hero-media {
+      order: -1;
+    }
+
+    .hero-media :global(img) {
+      aspect-ratio: 16 / 10;
+      border-radius: 24px;
+    }
+  }
+
   /* ─── Mobil ─── */
   @media (max-width: 768px) {
     .team-hero {
-      padding-top: 120px;
+      padding-top: 116px;
+    }
+
+    .hero-stats {
+      gap: 18px;
     }
 
     .team-grid {
@@ -526,95 +582,111 @@ const teamDepartments = categories.length - 1;
 
   gsap.registerPlugin(ScrollTrigger, Flip);
 
-  /* ── Hero entrance ── */
-  gsap.from('.team-hero > *', {
-    y: 28,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'power3.out',
-    stagger: 0.1,
-  });
+  function initTeam() {
+    const hero = document.querySelector('.team-hero');
+    const grid = document.querySelector('.team-grid');
+    if (!hero || !grid) return; // Vi er ikke på team-siden
 
-  /* ── Tæller-animation ── */
-  function runCounters() {
-    document.querySelectorAll<HTMLElement>('.stat-val[data-count]').forEach((el) => {
-      const target = Number(el.dataset.count || '0');
-      const obj = { val: 0 };
-      gsap.to(obj, {
-        val: target,
-        duration: 1.6,
-        ease: 'power2.out',
-        onUpdate: () => {
-          el.textContent = Math.round(obj.val).toString();
-        },
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = gsap.utils.toArray<HTMLElement>('.team-card');
+
+    /* ── Tæller-animation ── */
+    function runCounters() {
+      document.querySelectorAll<HTMLElement>('.stat-val[data-count]').forEach((el) => {
+        const target = Number(el.dataset.count || '0');
+        if (reduce) {
+          el.textContent = String(target);
+          return;
+        }
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 1.6,
+          ease: 'power2.out',
+          onUpdate: () => {
+            el.textContent = Math.round(obj.val).toString();
+          },
+        });
+      });
+    }
+
+    if (!reduce) {
+      /* ── Hero entrance ── */
+      gsap
+        .timeline({ defaults: { ease: 'power3.out' } })
+        .from('.hero-media', { x: -44, opacity: 0, duration: 0.9 })
+        .from(
+          '.hero-content > *',
+          { y: 26, opacity: 0, duration: 0.7, stagger: 0.1 },
+          '-=0.55'
+        );
+
+      /* ── Kort: scroll-reveal med stagger ── */
+      gsap.set(cards, { opacity: 0, y: 34 });
+      ScrollTrigger.create({
+        trigger: '.team-grid',
+        start: 'top 85%',
+        once: true,
+        onEnter: () =>
+          gsap.to(cards, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            stagger: { each: 0.035, grid: 'auto', from: 'start' },
+          }),
+      });
+    }
+
+    runCounters();
+
+    /* ── Filter med GSAP Flip ── */
+    const pills = gsap.utils.toArray<HTMLElement>('.filter-pill');
+    const noResults = document.querySelector<HTMLElement>('.no-results');
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const cat = pill.dataset.cat || 'alle';
+
+        pills.forEach((p) => {
+          const active = p === pill;
+          p.classList.toggle('is-active', active);
+          p.setAttribute('aria-selected', String(active));
+        });
+
+        // Optag nuværende layout før vi ændrer det
+        const state = Flip.getState(cards, { props: 'opacity' });
+
+        let visible = 0;
+        cards.forEach((card) => {
+          const show = cat === 'alle' || card.dataset.cat === cat;
+          card.style.display = show ? '' : 'none';
+          if (show) {
+            gsap.set(card, { opacity: 1, y: 0 });
+            visible++;
+          }
+        });
+
+        if (noResults) noResults.hidden = visible > 0;
+
+        Flip.from(state, {
+          duration: reduce ? 0 : 0.55,
+          scale: true,
+          ease: 'power2.inOut',
+          stagger: reduce ? 0 : 0.025,
+          absolute: true,
+          onEnter: (els) =>
+            gsap.fromTo(
+              els,
+              { opacity: 0, scale: 0.85 },
+              { opacity: 1, scale: 1, duration: reduce ? 0 : 0.45, ease: 'power2.out' }
+            ),
+          onLeave: (els) =>
+            gsap.to(els, { opacity: 0, scale: 0.85, duration: reduce ? 0 : 0.3, ease: 'power2.in' }),
+        });
       });
     });
   }
-  runCounters();
 
-  /* ── Kort: scroll-reveal med stagger ── */
-  const cards = gsap.utils.toArray<HTMLElement>('.team-card');
-  gsap.set(cards, { opacity: 0, y: 34 });
-
-  ScrollTrigger.create({
-    trigger: '.team-grid',
-    start: 'top 85%',
-    once: true,
-    onEnter: () =>
-      gsap.to(cards, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power3.out',
-        stagger: { each: 0.035, grid: 'auto', from: 'start' },
-      }),
-  });
-
-  /* ── Filter med GSAP Flip ── */
-  const pills = gsap.utils.toArray<HTMLElement>('.filter-pill');
-  const noResults = document.querySelector<HTMLElement>('.no-results');
-
-  pills.forEach((pill) => {
-    pill.addEventListener('click', () => {
-      const cat = pill.dataset.cat || 'alle';
-
-      pills.forEach((p) => {
-        const active = p === pill;
-        p.classList.toggle('is-active', active);
-        p.setAttribute('aria-selected', String(active));
-      });
-
-      // Optag nuværende layout før vi ændrer det
-      const state = Flip.getState(cards, { props: 'opacity' });
-
-      let visible = 0;
-      cards.forEach((card) => {
-        const show = cat === 'alle' || card.dataset.cat === cat;
-        card.style.display = show ? '' : 'none';
-        // Sørg for at synlige kort altid er fuldt synlige (i tilfælde af at scroll-reveal ikke nåede dem)
-        if (show) {
-          gsap.set(card, { opacity: 1, y: 0 });
-          visible++;
-        }
-      });
-
-      if (noResults) noResults.hidden = visible > 0;
-
-      Flip.from(state, {
-        duration: 0.55,
-        scale: true,
-        ease: 'power2.inOut',
-        stagger: 0.025,
-        absolute: true,
-        onEnter: (els) =>
-          gsap.fromTo(
-            els,
-            { opacity: 0, scale: 0.85 },
-            { opacity: 1, scale: 1, duration: 0.45, ease: 'power2.out' }
-          ),
-        onLeave: (els) =>
-          gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.3, ease: 'power2.in' }),
-      });
-    });
-  });
+  document.addEventListener('astro:page-load', initTeam);
 </script>

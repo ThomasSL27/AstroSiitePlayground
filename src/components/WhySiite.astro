@@ -177,7 +177,7 @@
     font-family: 'Comfortaa', cursive;
     font-size: 0.88rem;
     line-height: 1.8;
-    color: #777;
+    color: #6b6b6b;
   }
 
   @media (max-width: 900px) {
@@ -202,29 +202,30 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.from(".why-head > *", {
-    y: 28,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out",
-    stagger: 0.12,
-    scrollTrigger: {
-      trigger: ".why-head",
-      start: "top 80%",
-      once: true,
-    },
-  });
+  function initWhy() {
+    const section = document.querySelector(".why-section");
+    if (!section) return; // Findes kun på forsiden
+    // Reduceret bevægelse: vis indholdet statisk (ingen from-tweens)
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  gsap.from(".why-card", {
-    y: 48,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out",
-    stagger: 0.14,
-    scrollTrigger: {
-      trigger: ".why-grid",
-      start: "top 78%",
-      once: true,
-    },
-  });
+    gsap.from(".why-head > *", {
+      y: 28,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.12,
+      scrollTrigger: { trigger: ".why-head", start: "top 80%", once: true },
+    });
+
+    gsap.from(".why-card", {
+      y: 48,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.14,
+      scrollTrigger: { trigger: ".why-grid", start: "top 78%", once: true },
+    });
+  }
+
+  document.addEventListener("astro:page-load", initWhy);
 </script>

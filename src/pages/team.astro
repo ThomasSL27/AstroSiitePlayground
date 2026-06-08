@@ -30,48 +30,56 @@ const catLabel: Record<string, string> = {
   backoffice: 'Backoffice',
 };
 
-type Member = { name: string; title: string; cat: string; img: string };
+type Member = {
+  name: string;
+  title: string;
+  cat: string;
+  img: string;
+  email: string;
+  phone?: string;
+  linkedin: string;
+};
 
 const team: Member[] = [
   // Ledelse & partnere
-  { name: 'Mike Vestergaard', title: 'CEO, Partner', cat: 'ledelse', img: 'mike.jpg' },
-  { name: 'Mikkel Kragelund', title: 'COO, Partner', cat: 'ledelse', img: 'mikkel-kragelund.jpg' },
-  { name: 'Mads Klokkerholm Nielsen', title: 'CCO, Partner', cat: 'ledelse', img: 'mads-klokkerholm.jpg' },
-  { name: 'Leonardo Miodrag', title: 'CMO, Partner', cat: 'ledelse', img: 'leonardo.jpg' },
-  { name: 'Christian Barnbæk', title: 'Client Director', cat: 'ledelse', img: 'christian-barnbaek.jpg' },
-  { name: 'Luna Bock', title: 'CLO', cat: 'ledelse', img: 'luna.jpg' },
+  { name: 'Mike Vestergaard', title: 'CEO, Partner', cat: 'ledelse', img: 'mike.jpg', email: 'mike@siite.dk', linkedin: 'https://www.linkedin.com/in/mikevestergaard/' },
+  { name: 'Mikkel Kragelund', title: 'COO, Partner', cat: 'ledelse', img: 'mikkel-kragelund.jpg', email: 'mikkel@siite.dk', phone: '61 10 81 03', linkedin: 'https://www.linkedin.com/in/mikkel-kragelund-7b8088151/' },
+  { name: 'Mads Klokkerholm Nielsen', title: 'CCO, Partner', cat: 'ledelse', img: 'mads-klokkerholm.jpg', email: 'mads@siite.dk', linkedin: 'https://www.linkedin.com/in/madsklokkerholm/' },
+  { name: 'Leonardo Miodrag', title: 'CMO, Partner', cat: 'ledelse', img: 'leonardo.jpg', email: 'leonardo@siite.dk', linkedin: 'https://www.linkedin.com/in/leonardomiodrag/' },
+  { name: 'Christian Barnbæk', title: 'Client Director', cat: 'ledelse', img: 'christian-barnbaek.jpg', email: 'christian.b@siite.dk', linkedin: 'https://www.linkedin.com/in/christian-barnbæk-jensen-3842271a1/' },
+  { name: 'Luna Bock', title: 'CLO', cat: 'ledelse', img: 'luna.jpg', email: 'luna@siite.dk', linkedin: 'https://www.linkedin.com/in/luna-marie-søgaard-bock/' },
 
   // Salg & Account
-  { name: 'Mathias Nyborg Nielsen', title: 'Key Account Director', cat: 'salg', img: 'mathias.jpg' },
-  { name: 'Kenneth Vinther Kristensen', title: 'Key Account Manager', cat: 'salg', img: 'kenneth.jpg' },
-  { name: 'Kasper Daniel Jørgensen', title: 'Head of Sales New Business, CPH', cat: 'salg', img: 'kasper-daniel.png' },
-  { name: 'Martin Vanggaard Sund', title: 'Account Manager', cat: 'salg', img: 'martin.jpg' },
-  { name: 'Mads Christensen', title: 'Account Manager', cat: 'salg', img: 'mads-christensen.jpg' },
-  { name: 'Conor Demontli', title: 'Account Manager', cat: 'salg', img: 'conor.jpg' },
-  { name: 'Oscar Broen', title: 'Account Manager', cat: 'salg', img: 'oscar.jpg' },
-  { name: 'Dan Richard Pedersen', title: 'Account Manager', cat: 'salg', img: 'dan.jpg' },
-  { name: 'Victoria Kjær Kruse', title: 'Account Manager', cat: 'salg', img: 'victoria.png' },
+  { name: 'Mathias Nyborg Nielsen', title: 'Key Account Director', cat: 'salg', img: 'mathias.jpg', email: 'mathias@siite.dk', phone: '22 65 81 04', linkedin: 'https://www.linkedin.com/in/mathias-nyborg-nielsen-01468a224/' },
+  { name: 'Kenneth Vinther Kristensen', title: 'Key Account Manager', cat: 'salg', img: 'kenneth.jpg', email: 'kenneth@siite.dk', phone: '22 16 81 02', linkedin: 'https://www.linkedin.com/in/kenneth-vinther-kristensen-101817145/' },
+  { name: 'Kasper Daniel Jørgensen', title: 'Head of Sales New Business, CPH', cat: 'salg', img: 'kasper-daniel.png', email: 'kasper@siite.dk', phone: '53 57 20 74', linkedin: 'https://www.linkedin.com/in/kasper-daniel-629850234/' },
+  { name: 'Martin Vanggaard Sund', title: 'Account Manager', cat: 'salg', img: 'martin.jpg', email: 'martin@siite.dk', phone: '22 90 81 04', linkedin: 'https://www.linkedin.com/in/martinandersensund/' },
+  { name: 'Mads Christensen', title: 'Account Manager', cat: 'salg', img: 'mads-christensen.jpg', email: 'mads.c@siite.dk', phone: '61 10 81 02', linkedin: 'https://www.linkedin.com/in/mads-christensen-1b408a1a4/' },
+  { name: 'Conor Demontli', title: 'Account Manager', cat: 'salg', img: 'conor.jpg', email: 'conor@siite.dk', phone: '25 37 81 05', linkedin: 'https://www.linkedin.com/in/conor-demontli-18041b371/' },
+  { name: 'Oscar Broen', title: 'Account Manager', cat: 'salg', img: 'oscar.jpg', email: 'oscar@siite.dk', phone: '22 66 81 95', linkedin: 'https://www.linkedin.com/in/oscar-broen-135101255/' },
+  { name: 'Dan Richard Pedersen', title: 'Account Manager', cat: 'salg', img: 'dan.jpg', email: 'dan@siite.dk', phone: '22 66 81 45', linkedin: 'https://www.linkedin.com/in/dan-richard-pedersen-90b691187/' },
+  { name: 'Victoria Kjær Kruse', title: 'Account Manager', cat: 'salg', img: 'victoria.png', email: 'victoria@siite.dk', phone: '53 58 76 17', linkedin: 'https://www.linkedin.com/in/victoria-kruse-304215196/' },
 
   // Outbound
-  { name: 'Christian Thorvald Johansen', title: 'Outbound, Team Lead', cat: 'outbound', img: 'christian-thorvald.jpg' },
-  { name: 'Nicklas Morén', title: 'Outbound', cat: 'outbound', img: 'nicklas-moren.jpg' },
-  { name: 'Amel Spahic', title: 'Outbound', cat: 'outbound', img: 'amel.jpg' },
+  { name: 'Christian Thorvald Johansen', title: 'Outbound, Team Lead', cat: 'outbound', img: 'christian-thorvald.jpg', email: 'christian@siite.dk', phone: '22 27 81 06', linkedin: 'https://www.linkedin.com/in/christian-johansen-0b5349309/' },
+  { name: 'Nicklas Morén', title: 'Outbound', cat: 'outbound', img: 'nicklas-moren.jpg', email: 'nicklas@siite.dk', phone: '25 33 81 04', linkedin: 'https://www.linkedin.com/in/nicklas-moren/' },
+  { name: 'Amel Spahic', title: 'Outbound', cat: 'outbound', img: 'amel.jpg', email: 'amel@siite.dk', phone: '22 66 81 43', linkedin: 'https://www.linkedin.com/in/amel-spahic-826795170/' },
 
   // Udvikling
-  { name: 'Elvir Sejfulai', title: 'Web Developer', cat: 'udvikling', img: 'elvir.jpg' },
-  { name: 'Mads Buhl', title: 'Junior Web Developer', cat: 'udvikling', img: 'mads-buhl.jpg' },
-  { name: 'Thomas Søhus Larsen', title: 'Junior Web Developer', cat: 'udvikling', img: 'thomas.jpg' },
+  { name: 'Elvir Sejfulai', title: 'Web Developer', cat: 'udvikling', img: 'elvir.jpg', email: 'elvir@siite.dk', phone: '42 91 29 35', linkedin: 'https://www.linkedin.com/in/elvir-sejfulai/' },
+  { name: 'Mads Buhl', title: 'Junior Web Developer', cat: 'udvikling', img: 'mads-buhl.jpg', email: 'mads.b@siite.dk', linkedin: 'https://www.linkedin.com/in/mads-venø-buhl-134bbb266/' },
+  { name: 'Thomas Søhus Larsen', title: 'Junior Web Developer', cat: 'udvikling', img: 'thomas.jpg', email: 'thomas@siite.dk', linkedin: 'https://dk.linkedin.com/in/thomas-søhus-larsen-37a48b362' },
 
   // Marketing
-  { name: 'Mikkel Friis', title: 'Marketing Manager', cat: 'marketing', img: 'mikkel-friis.jpg' },
-  { name: 'Nicklas Dyrmose', title: 'SEO Specialist', cat: 'marketing', img: 'nicklas-dyrmose.jpg' },
-  { name: 'Kasper Glerup Rasmussen', title: 'Marketing Assistant', cat: 'marketing', img: 'kasper-glerup.jpg' },
-  { name: 'Natascha Leal', title: 'Marketing Assistant', cat: 'marketing', img: 'natascha.jpg' },
-  { name: 'Casper Thusgaard', title: 'Marketing Assistant', cat: 'marketing', img: 'casper.jpg' },
-  { name: 'Tobias William Christensen', title: 'Content Creator', cat: 'marketing', img: 'tobias.jpg' },
+  { name: 'Mikkel Friis', title: 'Marketing Manager', cat: 'marketing', img: 'mikkel-friis.jpg', email: 'mikkel@siite.dk', linkedin: 'https://www.linkedin.com/in/mikkel-friis-30a9b4274/' },
+  { name: 'Nicklas Dyrmose', title: 'SEO Specialist', cat: 'marketing', img: 'nicklas-dyrmose.jpg', email: 'nicklas.d@siite.dk', linkedin: 'https://www.linkedin.com/in/nicklas-dyrmose/' },
+  { name: 'Kasper Glerup Rasmussen', title: 'Marketing Assistant', cat: 'marketing', img: 'kasper-glerup.jpg', email: 'kasper@siite.dk', linkedin: 'https://www.linkedin.com/in/kasper-glerup-rasmussen/' },
+  { name: 'Natascha Leal', title: 'Marketing Assistant', cat: 'marketing', img: 'natascha.jpg', email: 'natascha@siite.dk', linkedin: 'https://www.linkedin.com/in/natascha-leal/' },
+  { name: 'Casper Thusgaard', title: 'Marketing Assistant', cat: 'marketing', img: 'casper.jpg', email: 'casper@siite.dk', linkedin: 'https://www.linkedin.com/in/casper-thusgaard-2a748556/' },
+  { name: 'Tobias William Christensen', title: 'Content Creator', cat: 'marketing', img: 'tobias.jpg', email: 'tobias@siite.dk', linkedin: 'https://www.linkedin.com/in/tobias-christensen-b1bbab2a9/' },
 
   // Backoffice
-  { name: 'Sofie Krogh Sand', title: 'Lead, Backoffice', cat: 'backoffice', img: 'sofie.jpg' },
+  { name: 'Sofie Krogh Sand', title: 'Lead, Backoffice', cat: 'backoffice', img: 'sofie.jpg', email: 'sofie@siite.dk', linkedin: 'https://www.linkedin.com/in/sofie-krogh-sand-461195118/' },
 ];
 
 const teamCount = team.length;
@@ -142,6 +150,37 @@ const teamDepartments = categories.length - 1;
                 <div class="card-meta">
                   <h3>{m.name}</h3>
                   <p>{m.title}</p>
+
+                  <div class="card-contact">
+                    <a
+                      class="contact-link"
+                      href={`mailto:${m.email}`}
+                      aria-label={`Send mail til ${m.name}`}
+                      title={m.email}
+                    >
+                      <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    {m.phone && (
+                      <a
+                        class="contact-link"
+                        href={`tel:+45${m.phone.replace(/\s/g, '')}`}
+                        aria-label={`Ring til ${m.name}`}
+                        title={`+45 ${m.phone}`}
+                      >
+                        <i class="fa-solid fa-phone"></i>
+                      </a>
+                    )}
+                    <a
+                      class="contact-link"
+                      href={m.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${m.name} på LinkedIn`}
+                      title="LinkedIn"
+                    >
+                      <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                  </div>
                 </div>
               </article>
             );
@@ -150,13 +189,6 @@ const teamDepartments = categories.length - 1;
       </div>
 
       <p class="no-results" hidden>Ingen i denne afdeling endnu.</p>
-    </section>
-
-    <!-- ─── CTA ─── -->
-    <section class="team-cta">
-      <h2>Vil du være en del af holdet?</h2>
-      <p>Vi leder altid efter dygtige folk, der brænder for digital vækst.</p>
-      <a href="#" class="cta-btn">Se ledige stillinger <i class="fa-solid fa-arrow-right"></i></a>
     </section>
   </main>
 </Layout>
@@ -406,6 +438,35 @@ const teamDepartments = categories.length - 1;
     color: #888;
     margin-top: 5px;
     line-height: 1.4;
+    min-height: 2.2em;
+  }
+
+  .card-contact {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #fff3ee;
+    color: #f05a24;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .contact-link:hover {
+    background: #f05a24;
+    color: #fff;
+    transform: translateY(-2px);
   }
 
   .no-results {
@@ -413,57 +474,6 @@ const teamDepartments = categories.length - 1;
     color: #999;
     font-size: 0.95rem;
     padding: 40px 0;
-  }
-
-  /* ─── CTA ─── */
-  .team-cta {
-    text-align: center;
-    background: #f05a24;
-    color: #fff;
-    padding: 80px 24px 88px;
-  }
-
-  .team-cta h2 {
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 14px;
-  }
-
-  .team-cta p {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 32px;
-  }
-
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #fff;
-    color: #f05a24;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 999px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
-  }
-
-  .cta-btn i {
-    font-size: 0.8rem;
-    transition: transform 0.2s ease;
-  }
-
-  .cta-btn:hover i {
-    transform: translateX(4px);
   }
 
   /* ─── Mobil ─── */

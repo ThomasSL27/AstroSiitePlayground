@@ -1,6 +1,6 @@
 ---
 import leonardoSrc from '../assets/Siite_Leonardo-removebg-preview.png?url';
-import salesSrc from '../assets/Siite-Sales.webp?url';
+import christianSrc from '../assets/Christian_Isolated.webp?url';
 ---
 
 <section class="h-section">
@@ -21,7 +21,7 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
       </div>
     </div>
 
-    <!-- Panel 2: horisontal scroll, orange med team-billede og counters -->
+    <!-- Panel 2: horisontal scroll -->
     <div class="h-panel">
       <div class="h-card orange-card-2">
         <div class="card-content-2">
@@ -45,8 +45,8 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
             </div>
           </div>
         </div>
-        <div class="card-photo">
-          <img src={salesSrc} alt="Siite salgsteam" />
+        <div class="card-image card-image-2">
+          <img src={christianSrc} alt="Christian fra Siite" />
         </div>
       </div>
     </div>
@@ -89,19 +89,7 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
     min-height: 520px;
   }
 
-  /* ── Kort 1: Orange ── */
-  .orange-card {
-    background: #f05a24;
-  }
-
-  .orange-card .card-content {
-    flex: 0 0 54%;
-    padding: 72px 48px 72px 72px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
+  /* ── Shared image column ── */
   .card-image {
     flex: 0 0 46%;
     display: flex;
@@ -117,13 +105,26 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
     display: block;
   }
 
-  /* ── Kort 2: Orange med team ── */
+  /* ── Kort 1: Orange ── */
+  .orange-card {
+    background: #f05a24;
+  }
+
+  .orange-card .card-content {
+    flex: 0 0 54%;
+    padding: 72px 48px 72px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* ── Kort 2: Orange ── */
   .orange-card-2 {
     background: #f05a24;
   }
 
   .card-content-2 {
-    flex: 0 0 55%;
+    flex: 0 0 54%;
     padding: 56px 40px 56px 64px;
     display: flex;
     flex-direction: column;
@@ -186,23 +187,6 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
     max-width: 280px;
   }
 
-  /* Team-billede i højre side — vises helt, ingen beskæring */
-  .card-photo {
-    flex: 0 0 45%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 56px 40px 0;
-  }
-
-  .card-photo img {
-    width: 100%;
-    max-height: 380px;
-    object-fit: contain;
-    border-radius: 16px;
-    display: block;
-  }
-
   /* ── Delte label/text styles ── */
   .label {
     display: block;
@@ -254,30 +238,50 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
     border-bottom-color: #fff;
   }
 
-  @media (max-width: 900px) {
+  /* ── Mobile: sektioner stables lodret ── */
+  @media (max-width: 768px) {
+    .h-section {
+      height: auto;
+      overflow: visible;
+    }
+
+    .h-track {
+      width: 100%;
+      flex-direction: column;
+    }
+
     .h-panel {
-      padding: 0 16px;
+      width: 100%;
+      height: auto;
+      padding: 16px 16px;
     }
 
     .h-card {
       flex-direction: column;
       min-height: auto;
+      border-radius: 24px;
     }
 
     .orange-card .card-content,
     .card-content-2 {
       flex: none;
-      padding: 40px 24px 24px;
+      padding: 36px 28px 20px;
     }
 
     .card-image {
       flex: none;
-      height: 220px;
+      height: 260px;
+      justify-content: center;
     }
 
-    .card-photo {
-      flex: none;
-      padding: 0 24px 32px;
+    .card-image img {
+      width: 75%;
+      max-height: 260px;
+    }
+
+    .counter-item {
+      grid-template-columns: 90px 1fr;
+      column-gap: 14px;
     }
 
     .counter-val {
@@ -292,24 +296,10 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Fase 1: Orange kort animerer ind af sig selv
-  gsap.from(".orange-card", {
-    x: "100vw",
-    opacity: 0,
-    duration: 1.0,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".h-section",
-      start: "top 70%",
-      once: true,
-    },
-  });
-
-  // Counter-animation (kører én gang når det andet kort er synligt)
+  // Counter-animation
   let countersStarted = false;
 
   function runCounters() {
-    // Counter 1: 30
     const c1 = document.getElementById("c1")!;
     const obj1 = { val: 0 };
     gsap.to(obj1, {
@@ -317,7 +307,6 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
       onUpdate: () => { c1.textContent = Math.round(obj1.val).toString(); },
     });
 
-    // Counter 2: 800+
     const c2 = document.getElementById("c2")!;
     const obj2 = { val: 0 };
     gsap.to(obj2, {
@@ -325,7 +314,6 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
       onUpdate: () => { c2.textContent = Math.round(obj2.val) + "+"; },
     });
 
-    // Counter 3: 4.9
     const c3 = document.getElementById("c3")!;
     const obj3 = { val: 0 };
     gsap.to(obj3, {
@@ -334,26 +322,78 @@ import salesSrc from '../assets/Siite-Sales.webp?url';
     });
   }
 
-  // Fase 2: Pin + horisontal scroll
-  const hTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".h-section",
-      pin: true,
-      anticipatePin: 1,
-      start: "top top",
-      end: "+=200%",
-      scrub: 1,
-      invalidateOnRefresh: true,
-      onUpdate(self) {
-        if (!countersStarted && self.progress >= 0.6) {
+  const mm = gsap.matchMedia();
+
+  // ── Desktop: første kort animerer ind + horisontal scroll ──
+  mm.add("(min-width: 769px)", () => {
+    gsap.from(".orange-card", {
+      x: "100vw",
+      opacity: 0,
+      duration: 1.0,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".h-section",
+        start: "top 70%",
+        once: true,
+      },
+    });
+
+    const track = document.querySelector(".h-track") as HTMLElement;
+    const distance = () => track.scrollWidth - window.innerWidth;
+
+    const hTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".h-section",
+        pin: true,
+        anticipatePin: 1,
+        start: "top top",
+        end: () => "+=" + (distance() + window.innerHeight * 0.6),
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        onUpdate(self) {
+          if (!countersStarted && self.progress >= 0.55) {
+            countersStarted = true;
+            runCounters();
+          }
+        },
+      },
+    });
+
+    hTl
+      .to(track, { x: () => -distance(), ease: "none", duration: 1 })
+      .to({}, { duration: 0.45 });
+
+    window.addEventListener("load", () => ScrollTrigger.refresh());
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+  });
+
+  // ── Mobil: counters starter ved simpelt scroll ──
+  mm.add("(max-width: 768px)", () => {
+    gsap.from(".orange-card, .orange-card-2", {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: ".h-section",
+        start: "top 80%",
+        once: true,
+      },
+    });
+
+    ScrollTrigger.create({
+      trigger: ".orange-card-2",
+      start: "top 75%",
+      once: true,
+      onEnter: () => {
+        if (!countersStarted) {
           countersStarted = true;
           runCounters();
         }
       },
-    },
+    });
   });
-
-  hTl
-    .to(".h-track", { xPercent: -50, ease: "none", duration: 1 })
-    .to({}, { duration: 0.35 }); // hold så panel 2 bliver i centrum til sidst
 </script>

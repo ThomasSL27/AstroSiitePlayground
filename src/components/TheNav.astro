@@ -14,10 +14,8 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
         <i class="fa-solid fa-chevron-down chevron"></i>
       </a>
 
-      <!-- Mega menu -->
       <div class="mega-menu" role="region" aria-label="Ydelser menu">
         <div class="mega-panel">
-
           <div class="mega-col">
             <p class="col-title">Web</p>
             <a href="#" class="mega-item">
@@ -99,7 +97,6 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
               <i class="fa-solid fa-arrow-right"></i>
             </a>
           </div>
-
         </div>
       </div>
     </li>
@@ -108,7 +105,38 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     <li><a href="#" class="nav-link-item">Om Os</a></li>
     <li><a href="#" class="nav-link-item contact-btn">Kontakt</a></li>
   </ul>
+
+  <button class="hamburger" id="nav-hamburger" aria-label="Åbn menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu">
+  <ul class="mobile-links">
+    <li>
+      <button class="mobile-link mobile-accordion" aria-expanded="false">
+        Ydelser <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+      </button>
+      <ul class="mobile-sub">
+        <li><a href="#"><i class="fa-solid fa-display"></i> Webdesign</a></li>
+        <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> E-handel</a></li>
+        <li><a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Vedligeholdelse</a></li>
+        <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i> SEO</a></li>
+        <li><a href="#"><i class="fa-solid fa-chart-line"></i> Google Ads</a></li>
+        <li><a href="#"><i class="fa-brands fa-instagram"></i> Social Media</a></li>
+        <li><a href="#"><i class="fa-solid fa-pen-nib"></i> Logo Design</a></li>
+        <li><a href="#"><i class="fa-solid fa-palette"></i> Brand Identity</a></li>
+        <li><a href="#"><i class="fa-solid fa-lightbulb"></i> Strategi</a></li>
+      </ul>
+    </li>
+    <li><a href="#" class="mobile-link">Cases</a></li>
+    <li><a href="#" class="mobile-link">Om Os</a></li>
+    <li><a href="#" class="mobile-link mobile-contact">Kontakt</a></li>
+  </ul>
+</div>
 
 <style>
   #the-nav {
@@ -182,6 +210,49 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     transform: rotate(180deg);
   }
 
+  /* ─── Hamburger (hidden on desktop) ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background 0.18s ease;
+  }
+
+  .hamburger:hover {
+    background: #fff3ee;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #222;
+    border-radius: 2px;
+    transition: transform 0.28s ease, opacity 0.28s ease;
+    transform-origin: center;
+  }
+
+  .hamburger.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   /* ─── Mega menu wrapper ─── */
   .mega-menu {
     position: absolute;
@@ -193,7 +264,6 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     pointer-events: none;
   }
 
-  /* ─── Mega panel ─── */
   .mega-panel {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.06);
@@ -277,7 +347,6 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     font-family: 'Comfortaa', cursive;
   }
 
-  /* ─── Footer row ─── */
   .mega-footer {
     grid-column: 1 / -1;
     border-top: 1.5px solid #f2f2f2;
@@ -315,12 +384,128 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     transform: translateX(3px);
   }
 
-  @media (max-width: 640px) {
+  /* ─── Mobile menu ─── */
+  #mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #fff;
+    padding: 0 24px 32px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-110%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none;
+  }
+
+  #mobile-menu.is-open {
+    transform: translateY(0);
+  }
+
+  .mobile-links {
+    list-style: none;
+    padding-top: 80px;
+  }
+
+  .mobile-links > li {
+    border-bottom: 1px solid #f2f2f2;
+  }
+
+  .mobile-links > li:last-child {
+    border-bottom: none;
+    padding-top: 16px;
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 4px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .mobile-chevron {
+    font-size: 0.7rem;
+    color: #aaa;
+    transition: transform 0.25s ease;
+  }
+
+  .mobile-accordion.is-open .mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mobile-sub {
+    list-style: none;
+    display: none;
+    padding: 0 0 12px 8px;
+  }
+
+  .mobile-sub.is-open {
+    display: block;
+  }
+
+  .mobile-sub li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 4px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: color 0.16s ease;
+  }
+
+  .mobile-sub li a i {
+    color: #f05a24;
+    font-size: 0.85rem;
+    width: 18px;
+    text-align: center;
+  }
+
+  .mobile-sub li a:hover {
+    color: #f05a24;
+  }
+
+  .mobile-contact {
+    display: block !important;
+    text-align: center;
+    background: #f05a24;
+    color: #fff !important;
+    padding: 16px !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    justify-content: center !important;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
     #the-nav {
       padding: 12px 20px;
     }
+
     .nav-links {
-      gap: 4px;
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    #mobile-menu {
+      display: block;
     }
   }
 </style>
@@ -342,7 +527,7 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
     },
   });
 
-  /* ─── Mega menu ─── */
+  /* ─── Mega menu (desktop) ─── */
   const hasMega = document.querySelector(".has-mega")!;
   const megaMenu = hasMega.querySelector(".mega-menu") as HTMLElement;
   const megaPanel = hasMega.querySelector(".mega-panel") as HTMLElement;
@@ -353,6 +538,7 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
   let closeTimer: ReturnType<typeof setTimeout> | null = null;
 
   function openMega() {
+    if (window.innerWidth <= 768) return;
     if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
     if (closeTween) { closeTween.kill(); closeTween = null; }
     if (isOpen) return;
@@ -372,7 +558,6 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
   }
 
   function closeMega() {
-    // Kort delay forhindrer flicker når musen krydser grænsen til mega-panelet
     closeTimer = setTimeout(() => {
       closeTimer = null;
       if (!isOpen) return;
@@ -394,4 +579,30 @@ import logoSrc from '../assets/Siite-Logo-Black-and-Orange.svg?url';
 
   hasMega.addEventListener("mouseenter", openMega);
   hasMega.addEventListener("mouseleave", closeMega);
+
+  /* ─── Hamburger + mobile menu ─── */
+  const hamburger = document.getElementById("nav-hamburger")!;
+  const mobileMenu = document.getElementById("mobile-menu")!;
+
+  hamburger.addEventListener("click", () => {
+    const open = hamburger.classList.toggle("is-open");
+    hamburger.setAttribute("aria-expanded", String(open));
+    if (open) {
+      mobileMenu.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    } else {
+      mobileMenu.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+  });
+
+  /* ─── Mobile accordion (Ydelser) ─── */
+  const accordion = document.querySelector(".mobile-accordion")!;
+  const mobileSub = accordion.nextElementSibling as HTMLElement;
+
+  accordion.addEventListener("click", () => {
+    const open = accordion.classList.toggle("is-open");
+    accordion.setAttribute("aria-expanded", String(open));
+    mobileSub.classList.toggle("is-open", open);
+  });
 </script>

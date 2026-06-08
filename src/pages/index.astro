@@ -17,7 +17,7 @@ import WhySiite from '../components/WhySiite.astro';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <style>
+    <style is:global>
       *, *::before, *::after {
         margin: 0;
         padding: 0;
@@ -34,7 +34,8 @@ import WhySiite from '../components/WhySiite.astro';
         font-family: 'Comfortaa', cursive;
         background: #ffffff;
       }
-
+    </style>
+    <style>
       #hero {
         position: relative;
         display: flex;

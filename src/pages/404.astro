@@ -1,0 +1,388 @@
+---
+import leonardoSrc from '../assets/Siite_Leonardo-removebg-preview.png?url';
+import Layout from '../layouts/Layout.astro';
+import TheNav from '../components/TheNav.astro';
+import TheFooter from '../components/TheFooter.astro';
+---
+
+<Layout
+  title="404 — Siden blev ikke fundet | Siite"
+  description="Hovsa — den side, du leder efter, findes ikke. Find vej tilbage til Siite eller kontakt os, så hjælper vi dig videre."
+>
+  <TheNav revealOnScroll={false} />
+
+  <main id="notfound">
+    <!-- Baggrunds-blobs -->
+    <div class="nf-bg" aria-hidden="true">
+      <div class="nf-blob nf-blob-1"></div>
+      <div class="nf-blob nf-blob-2"></div>
+    </div>
+
+    <!-- Flydende service-pills -->
+    <div class="nf-pills" aria-hidden="true">
+      <span class="nf-pill"><i class="fa-solid fa-display"></i> Webdesign</span>
+      <span class="nf-pill"><i class="fa-solid fa-magnifying-glass"></i> SEO</span>
+      <span class="nf-pill"><i class="fa-solid fa-chart-line"></i> Performance</span>
+      <span class="nf-pill"><i class="fa-solid fa-pen-nib"></i> Branding</span>
+    </div>
+
+    <div class="nf-inner">
+      <img class="nf-mascot" src={leonardoSrc} alt="" aria-hidden="true" decoding="async" />
+
+      <span class="nf-eyebrow">Fejl 404</span>
+
+      <h1 class="nf-code" aria-label="404">
+        <span>4</span><span class="nf-zero" id="nf-zero">0</span><span>4</span>
+      </h1>
+
+      <h2 class="nf-title">Hovsa — den side findes ikke</h2>
+      <p class="nf-sub">Siden er måske flyttet, slettet eller har aldrig eksisteret. Men bare rolig — vi hjælper dig hurtigt videre.</p>
+
+      <div class="nf-cta">
+        <a href="/" class="btn-primary">Tilbage til forsiden <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="/kontakt" class="btn-ghost">Kontakt os</a>
+      </div>
+
+      <div class="nf-links">
+        <span class="nf-links-label">Populære sider</span>
+        <a href="/">Forsiden</a>
+        <a href="/team">Team</a>
+        <a href="/#hero">Ydelser</a>
+        <a href="/kontakt">Kontakt</a>
+      </div>
+    </div>
+  </main>
+
+  <TheFooter />
+</Layout>
+
+<style>
+  #notfound {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: calc(var(--nav-h, 64px) + 40px) 1.5em 80px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  /* ── Baggrunds-blobs ── */
+  .nf-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .nf-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(72px);
+  }
+
+  .nf-blob-1 {
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, rgba(240, 90, 36, 0.13) 0%, transparent 70%);
+    bottom: -100px;
+    right: -80px;
+  }
+
+  .nf-blob-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(240, 90, 36, 0.09) 0%, transparent 70%);
+    top: 2%;
+    left: -80px;
+  }
+
+  /* ── Service-pills ── */
+  .nf-pills {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nf-pill {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    background: #fff;
+    border: 1.5px solid #f0e8e4;
+    border-radius: 999px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  .nf-pill i {
+    color: #f05a24;
+    font-size: 0.68rem;
+  }
+
+  .nf-pill:nth-child(1) { top: 20%; left: 9%; }
+  .nf-pill:nth-child(2) { top: 26%; right: 10%; }
+  .nf-pill:nth-child(3) { bottom: 22%; left: 8%; }
+  .nf-pill:nth-child(4) { bottom: 26%; right: 9%; }
+
+  /* ── Indhold ── */
+  .nf-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .nf-mascot {
+    width: 120px;
+    height: auto;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 16px 30px rgba(240, 90, 36, 0.22));
+  }
+
+  .nf-eyebrow {
+    display: inline-block;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f05a24;
+    padding: 7px 18px;
+    border: 1.5px solid #f9ddd2;
+    border-radius: 999px;
+    background: #fff7f3;
+    margin-bottom: 22px;
+  }
+
+  .nf-code {
+    font-family: 'Comfortaa', cursive;
+    font-size: clamp(5rem, 18vw, 11rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+
+  .nf-zero {
+    color: #f05a24;
+    display: inline-block;
+  }
+
+  .nf-title {
+    font-family: 'Comfortaa', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.18;
+    margin-bottom: 16px;
+  }
+
+  .nf-sub {
+    font-family: 'Comfortaa', cursive;
+    font-size: 1rem;
+    color: #888;
+    line-height: 1.75;
+    max-width: 440px;
+    margin-bottom: 34px;
+  }
+
+  /* ── Knapper ── */
+  .nf-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 44px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 30px;
+    background: #f05a24;
+    color: #fff;
+    border-radius: 999px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(240, 90, 36, 0.35);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: #d44e1c;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(240, 90, 36, 0.42);
+  }
+
+  .btn-primary i {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-primary:hover i {
+    transform: translateX(3px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1.5px solid #e7e7e7;
+    border-radius: 999px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: #f9ddd2;
+    color: #f05a24;
+    background: #fff7f3;
+  }
+
+  /* ── Hurtige links ── */
+  .nf-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 18px;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  .nf-links-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #b3b3b3;
+    font-weight: 700;
+  }
+
+  .nf-links a {
+    position: relative;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+
+  .nf-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1.5px;
+    background: #f05a24;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .nf-links a:hover {
+    color: #f05a24;
+  }
+
+  .nf-links a:hover::after {
+    transform: scaleX(1);
+  }
+
+  @media (max-width: 1100px) {
+    .nf-pills { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .nf-mascot { width: 90px; }
+    .nf-sub { font-size: 0.92rem; }
+    .nf-cta { width: 100%; }
+    .btn-primary,
+    .btn-ghost { flex: 1 1 auto; justify-content: center; }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+
+  gsap.registerPlugin(ScrambleTextPlugin);
+
+  function initNotFound() {
+    const root = document.getElementById("notfound");
+    if (!root) return; // Vi er ikke på 404-siden
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      gsap.set(".nf-pill", { opacity: 1 });
+      return;
+    }
+
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    tl.from(".nf-eyebrow", { opacity: 0, y: 16, duration: 0.5 });
+    tl.from(".nf-mascot", { opacity: 0, y: -24, scale: 0.85, duration: 0.6, ease: "back.out(1.6)" }, "-=0.3");
+    tl.from(".nf-code", { opacity: 0, scale: 0.9, duration: 0.5 }, "-=0.2");
+
+    // Scramble på "0"-tallet
+    const zero = document.getElementById("nf-zero");
+    if (zero) {
+      tl.to(zero, {
+        duration: 1.1,
+        scrambleText: { text: "0", chars: "0123456789", speed: 0.7 },
+      }, "-=0.2");
+    }
+
+    tl.from(".nf-title", { opacity: 0, y: 18, duration: 0.5 }, "-=0.7");
+    tl.from(".nf-sub", { opacity: 0, y: 16, duration: 0.5 }, "-=0.35");
+    tl.from(".nf-cta", { opacity: 0, y: 16, duration: 0.5 }, "-=0.3");
+    tl.from(".nf-links", { opacity: 0, y: 14, duration: 0.45 }, "-=0.3");
+
+    // Pills toner ind og svæver blødt
+    tl.to(".nf-pill", { opacity: 1, duration: 0.5, stagger: 0.1 }, "-=0.4");
+    tl.add(() => {
+      document.querySelectorAll<HTMLElement>(".nf-pill").forEach((pill, i) => {
+        gsap.to(pill, {
+          y: `+=${6 + i * 1.5}`,
+          duration: 2.2 + i * 0.35,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.2,
+        });
+      });
+    });
+
+    // Lille hop på maskotten
+    tl.to(".nf-mascot", {
+      y: "-=8",
+      duration: 1.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    }, "<");
+  }
+
+  document.addEventListener("astro:page-load", initNotFound);
+</script>
